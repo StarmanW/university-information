@@ -18,7 +18,6 @@ class CreateLoansTable extends Migration
             $table->string('loan_name');
             $table->string('loan_desc');
             $table->double('loan_amount');
-            $table->timestamps();
         });
     }
 

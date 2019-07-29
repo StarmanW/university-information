@@ -16,7 +16,7 @@ class CreateProgrammeCertificatesTable extends Migration
         Schema::create('programme_certificates', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('prog_id', 3);
-            $table->bigIncrements('cert_id');
+            $table->unsignedBigInteger('cert_id');
         });
     }
 

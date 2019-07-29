@@ -15,7 +15,7 @@ class CreateAccomodationsTable extends Migration
     {
         Schema::create('accomodations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigIncrements('campus_id');
+            $table->unsignedBigInteger('campus_id');
             $table->string('accom_name');
             $table->string('accom_desc');
             $table->string('accom_location');

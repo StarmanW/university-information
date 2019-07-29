@@ -15,8 +15,8 @@ class CreateCampusFacultiesTable extends Migration
     {
         Schema::create('campus_faculties', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigIncrements('faculty_id');
-            $table->bigIncrements('campus_id');
+            $table->unsignedBigInteger('campus_id');
+            $table->string('faculty_id', 4);
         });
     }
 

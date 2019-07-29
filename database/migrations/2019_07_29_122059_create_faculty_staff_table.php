@@ -15,8 +15,8 @@ class CreateFacultyStaffTable extends Migration
     {
         Schema::create('faculty_staff', function (Blueprint $table) {
             $table->string('id', 10)->primary();
-            $table->bigIncrements('user_id');
-            $table->string('faculty_id', 10);
+            $table->unsignedBigInteger('user_id');
+            $table->string('faculty_id', 4);
             $table->string('name');
             $table->string('specialization');
             $table->string('area_of_interest');
