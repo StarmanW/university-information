@@ -4,14 +4,14 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header"></div>
 
                 <div class="card-body">
                     <table border="1">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
+                                <th>Email</th>
                                 <th colspan="2">Role</th>
                                 <th></th>
                             </tr>
