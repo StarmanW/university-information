@@ -17,6 +17,7 @@ class CreateCampusFacultiesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('campus_id');
             $table->string('faculty_id', 4);
+            $table->timestamps();
         });
     }
 

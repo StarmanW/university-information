@@ -21,6 +21,7 @@ class CreateFacultyStaffTable extends Migration
             $table->string('specialization');
             $table->string('area_of_interest');
             $table->string('position');
+            $table->timestamps();
         });
     }
 

@@ -17,6 +17,7 @@ class CreateProgrammeLoansTable extends Migration
             $table->bigIncrements('id');
             $table->string('prog_id', 3);
             $table->unsignedBigInteger('loan_id');
+            $table->timestamps();
         });
     }
 

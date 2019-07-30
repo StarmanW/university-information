@@ -17,6 +17,7 @@ class CreateCampusProgrammesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('campus_id');
             $table->string('prog_id', 3);
+            $table->timestamps();
         });
     }
 

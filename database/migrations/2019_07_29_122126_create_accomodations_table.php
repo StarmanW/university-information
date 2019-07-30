@@ -17,8 +17,9 @@ class CreateAccomodationsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('campus_id');
             $table->string('accom_name');
-            $table->string('accom_desc');
-            $table->string('accom_location');
+            $table->longText('accom_desc');
+            $table->mediumText('accom_location');
+            $table->timestamps();
         });
     }
 

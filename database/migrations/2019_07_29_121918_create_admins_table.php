@@ -17,6 +17,7 @@ class CreateAdminsTable extends Migration
             $table->string('id', 10)->primary();
             $table->unsignedBigInteger('user_id');
             $table->string('name');
+            $table->timestamps();
         });
     }
 
