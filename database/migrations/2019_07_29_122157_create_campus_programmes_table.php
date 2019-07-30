@@ -15,8 +15,9 @@ class CreateCampusProgrammesTable extends Migration
     {
         Schema::create('campus_programmes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('prog_id');
-            $table->bigIncrements('campus_id');
+            $table->unsignedBigInteger('campus_id');
+            $table->string('prog_id', 3);
+            $table->timestamps();
         });
     }
 

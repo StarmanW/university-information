@@ -12,11 +12,12 @@ class FacultyStaff extends Model
     // One-To-One User Relationship
     public function user()
     {
-        return $this->hasOne('App\User', 'user_id', 'id');
+        return $this->hasOne('App\User');
     }
 
+    // Many-to-One Faculty relationship
     public function faculties()
     {
-        return $this->hasMany('App\Model\Faculty', 'faculty_id', 'id');
+        return $this->belongsTo('App\Model\Faculty');
     }
 }

@@ -16,7 +16,8 @@ class CreateProgrammeLoansTable extends Migration
         Schema::create('programme_loans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('prog_id', 3);
-            $table->bigIncrements('loan_id');
+            $table->unsignedBigInteger('loan_id');
+            $table->timestamps();
         });
     }
 

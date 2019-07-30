@@ -18,6 +18,7 @@ class CreateProgrammeCoursesTable extends Migration
             $table->string('prog_id', 3);
             $table->string('course_id', 8);
             $table->boolean('is_elective');
+            $table->timestamps();
         });
     }
 

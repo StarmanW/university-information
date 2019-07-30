@@ -14,11 +14,14 @@ class CreateProgrammesTable extends Migration
     public function up()
     {
         Schema::create('programmes', function (Blueprint $table) {
-            $table->string('id', 3);
+            $table->string('id', 3)->primary();
+            $table->string('faculty_id', 4);
             $table->string('prog_name');
-            $table->string('prog_desc');
+            $table->longText('prog_desc');
             $table->string('prog_mer');
+            $table->string('prog_level');
             $table->integer('prog_duration');
+            $table->timestamps();
         });
     }
 
