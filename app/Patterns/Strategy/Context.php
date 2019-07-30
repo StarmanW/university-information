@@ -11,7 +11,7 @@ class Context
         $this->strategy = $strategy;
     }
 
-    public function executeStrategy($request)
+    public function executeStrategy($request = null)
     {
         return $this->strategy->execute($request);
     }
