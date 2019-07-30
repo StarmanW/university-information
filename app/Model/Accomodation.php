@@ -12,6 +12,6 @@ class Accomodation extends Model
     // Many-To-One Campus Relationship
     public function campuses()
     {
-        return $this->belongsTo('App\Models\Campus');
+        return $this->belongsTo('App\Models\Campus', 'campus_id', 'id');
     }
 }

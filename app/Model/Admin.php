@@ -12,6 +12,6 @@ class Admin extends Model
     // One-To-One User Relationship
     public function user()
     {
-        return $this->hasOne('App\User');
+        return $this->hasOne('App\User', 'user_id', 'id');
     }
 }

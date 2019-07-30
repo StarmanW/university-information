@@ -8,6 +8,6 @@ class Loan extends Model
 {
     public function programmeLoans()
     {
-        return $this->hasMany('App\Model\ProgrammeLoan');
+        return $this->hasMany('App\Model\ProgrammeLoan', 'loan_id', 'id');
     }
 }

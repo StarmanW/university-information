@@ -8,11 +8,11 @@ class ProgrammeCourse extends Model
 {
     public function programmes()
     {
-        return $this->belongsTo('App\Model\Programme');
+        return $this->belongsTo('App\Model\Programme', 'prog_id', 'id');
     }
 
     public function courses()
     {
-        return $this->belongsTo('App\Model\Course');
+        return $this->belongsTo('App\Model\Course', 'course_id', 'id');
     }
 }

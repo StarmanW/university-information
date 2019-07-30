@@ -8,11 +8,11 @@ class ProgrammeCertificate extends Model
 {
     public function programmes()
     {
-        return $this->belongsTo('App\Model\Programme');
+        return $this->belongsTo('App\Model\Programme', 'prog_id', 'id');
     }
 
     public function certificates()
     {
-        return $this->belongsTo('App\Model\Certificate');
+        return $this->belongsTo('App\Model\Certificate', 'cert_id', 'id');
     }
 }

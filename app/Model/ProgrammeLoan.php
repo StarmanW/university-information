@@ -8,11 +8,11 @@ class ProgrammeLoan extends Model
 {
     public function programmes()
     {
-        return $this->belongsTo('App\Model\Programme');
+        return $this->belongsTo('App\Model\Programme', 'prog_id', 'id');
     }
 
     public function loans()
     {
-        return $this->belongsTo('App\Model\Loan');
+        return $this->belongsTo('App\Model\Loan', 'loan_id', 'id');
     }
 }
