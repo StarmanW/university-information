@@ -55,4 +55,5 @@ Route::post('/courses/{id}/edit', 'CourseController@update');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['web', 'RedirectAdmin']], function () {
     Route::get('/home', 'AdminControllers\AdminController@index');
+    Route:get('/user/{id}/edit', 'EditController@edit');
 });

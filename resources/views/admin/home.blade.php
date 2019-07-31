@@ -28,7 +28,7 @@
                                 @endif
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->role }}</td>
-                                <td><a href="/admin/edit/id={{ $user->id }}">Edit</a></td>
+                                <td><a href="/admin/edit/{{ $user->id }}">Edit</a></td>
                             </tr>
                             @endforeach
                         </tbody>

@@ -2,17 +2,7 @@
 
 namespace App\CustomClass;
 
-use App\User;
-use App\Model\Admin;
-use App\Model\FacultyStaff;
-use App\Model\Faculty;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Validation\Rule;
 
 /*
@@ -42,6 +32,7 @@ class CentralValidator {
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'roleAdmin' => ['required', 'string', Rule::in(['Admin'])],
             'roleStaff' => ['required', 'string', Rule::in(['Staff'])],
+            'roleAdminOrStaff' => ['required', 'string',  Rule::in(['Admin', 'Staff'])],
             'faculty' => ['required', 'string', 'exists:faculties,id', 'regex:/^[A-z]{4}$/'],
             'position' => ['required', 'string', Rule::in(['Dean', 'Lecturer', 'Tutor'])],
             //course
@@ -79,6 +70,13 @@ class CentralValidator {
                     'specialization' => $this->validationRules['textWithSymbols'],
                     'interest' => $this->validationRules['textWithSymbols'],
                     'position' => $this->validationRules['textWithSymbols']
+        ]);
+    }
+    
+    public function validateEditUser($data) {
+        return Validator::make($data, [
+            'id' => $this->validationRules['numeric'],
+            'role' => $this->validationRules['roleAdminOrStaff']
         ]);
     }
 

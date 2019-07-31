@@ -3,32 +3,29 @@
 namespace App\Http\Controllers\AdminControllers;
 
 use App\User;
+use App\CustomClass\CentralValidator;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
-class EditController extends Controller
-{
+class EditController extends Controller {
+
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
     protected $redirectTo = '/admin/home';
-    
+
     /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'id' => ['required', 'string', 'numeric'],
-            'role' => ['required', 'string',  Rule::in(['Admin', 'Staff'])]
-        ]);
+    protected function validator(array $data) {
+        return $this->validator->validateEditUser($data);
     }
 
     /**
@@ -37,17 +34,21 @@ class EditController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
-    {
-        
-        //find user using id
-        //load user data here
-        //send again
-//        return User::create([request(),
-//            'name' => $data['name'],
-//            'email' => $data['email'],
-//            'password' => Hash::make($data['password']),
-//            'role' => $data['role'],
-//        ]);
+    protected function create(array $data) {
+        $user = User::find($id);
+
+        return view('admin.edit-user')->with($user);
     }
+
+    protected function edit(Request $request) {
+        $user = User::find($request->input(id));
+        $user->role = $request->input('role');
+
+        if ($user->save()) {
+            return redirect('/admin/home');
+        } else {
+            return redirect()->back()->withInputs()->withErrors();
+        }
+    }
+
 }
