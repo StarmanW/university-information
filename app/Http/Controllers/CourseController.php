@@ -7,6 +7,7 @@ use App\Model\Course;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Model\ProgrammeCourse;
+use App\Model\Programme;
 
 class CourseController extends Controller
 {
@@ -89,7 +90,6 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         //Validate Data
         $validator = Validator::make($request->all(), [
             'course_name' => ['required', 'string', 'min:2', 'max:255', 'regex:/^[A-z\(\)\-\@\, ]{2,255}$/'],
@@ -118,25 +118,67 @@ class CourseController extends Controller
 
     public function courses($id)
     {
-        $existingProgCourse = ProgrammeCourse::pluck('course_id')->all();
+        $existingProgCourse = ProgrammeCourse::where('prog_id', $id)->where('is_elective', 0)->pluck('course_id')->all();
         $facultyCourses = Course::whereNotIn('id', $existingProgCourse)->get();
         $progCourses = ProgrammeCourse::where('is_elective', '=', 0)->where('prog_id', '=', $id)->get();
         return view('programme.course', ['facultyCourses' => $facultyCourses, 'progCourses' => $progCourses, 'prog_id' => $id]);
     }
 
-    public function addProgCourses()
-    { }
+    public function addProgCourses(Request $request, $id)
+    {
+        if (Programme::where('id', $id)->exists()) {
+            foreach ($request->input('faculty_courses') as $courseID) {
+                $programmeCourse = new ProgrammeCourse();
+                $programmeCourse->prog_id = $id;
+                $programmeCourse->course_id = $courseID;
+                $programmeCourse->is_elective = false;
+                $programmeCourse->save();
+            }
+        }
+        return redirect()->back()->with('successAddProgCourses', true);
+    }
 
-    public function removeProgCourses()
-    { }
+    public function removeProgCourses(Request $request, $id)
+    {
+        if (Programme::where('id', $id)->exists()) {
+            foreach ($request->input('prog_courses') as $id) {
+                $programmeCourse = ProgrammeCourse::find($id);
+                $programmeCourse->delete();
+            }
+        }
+        return redirect()->back()->with('successRemoveProgCourses', true);
+     }
 
-    public function electiveCourses()
-    { }
+    public function electiveCourses(Request $request, $id)
+    {
+        $existingProgCourse = ProgrammeCourse::where('is_elective', 1)->where('prog_id', $id)->pluck('course_id')->all();
+        $facultyCourses = Course::whereNotIn('id', $existingProgCourse)->get();
+        $progCourses = ProgrammeCourse::where('is_elective', '=', 1)->where('prog_id', '=', $id)->get();
+        return view('programme.elective_course', ['facultyCourses' => $facultyCourses, 'progCourses' => $progCourses, 'prog_id' => $id]);
+     }
 
-    public function addProgElectiveCourses()
-    { }
+    public function addProgElectiveCourses(Request $request, $id)
+    { 
+        if (Programme::where('id', $id)->exists()) {
+            foreach ($request->input('faculty_courses') as $courseID) {
+                $programmeCourse = new ProgrammeCourse();
+                $programmeCourse->prog_id = $id;
+                $programmeCourse->course_id = $courseID;
+                $programmeCourse->is_elective = true;
+                $programmeCourse->save();
+            }
+        }
+        return redirect()->back()->with('successAddProgElectiveCourses', true);
+    }
 
-    public function removeProgElectiveCourses()
-    { }
-
+    public function removeProgElectiveCourses(Request $request, $id)
+    {
+        if (Programme::where('id', $id)->exists()) {
+            foreach ($request->input('prog_courses') as $id) {
+                $programmeCourse = ProgrammeCourse::find($id);
+                $programmeCourse->delete();
+            }
+        }
+        return redirect()->back()->with('successRemoveProgElectiveCourses', true);
+     }
 }

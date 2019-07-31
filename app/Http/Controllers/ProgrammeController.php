@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Patterns\Strategy\DisplayProgramme;
 use App\XML\CampusDOMParser;
 use App\Patterns\Strategy\UpdateProgramme;
+use App\Model\Programme;
 
 class ProgrammeController extends Controller
 {
@@ -22,6 +23,13 @@ class ProgrammeController extends Controller
         $context = new Context(new DisplayProgramme());
         $programmes = $context->executeStrategy();
         return view('programme.index')->with('programmes', $programmes);
+    }
+
+    public function show($id)
+    {
+        $prog = Programme::find($id);
+        dd($prog);
+        return view('programme.view')->with('prog', $prog);
     }
 
     /**
@@ -114,16 +122,5 @@ class ProgrammeController extends Controller
                 return redirect()->back()->with('updateStatus', false)->withInput();
             }
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

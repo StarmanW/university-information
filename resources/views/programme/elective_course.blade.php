@@ -2,14 +2,14 @@
 
 @section('content')
 <div class="container">
-    @if (session('successAddProgCourses') === true)
+    @if (session('successAddProgElectiveCourses') === true)
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
         <strong>Courses has been successfully added to programme!</strong>
     </div>
-    @elseif (session('successAddProgCourses') === false)
+    @elseif (session('successAddProgElectiveCourses') === false)
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -18,14 +18,14 @@
     </div>
     @endif
 
-    @if (session('successRemoveProgCourses') === true)
+    @if (session('successRemoveProgElectiveCourses') === true)
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
         <strong>Courses has been successfully removed from programme!</strong>
     </div>
-    @elseif (session('successRemoveProgCourses') === false)
+    @elseif (session('successRemoveProgElectiveCourses') === false)
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -36,9 +36,9 @@
 
     <div class="row">
         <div class="col-md-6">
-            <h1 class="text-center">Course List for {{$prog_id}}</h1>
+            <h1 class="text-center">Elective Course List for {{$prog_id}}</h1>
             @if (count($progCourses) !== 0)
-            <form method="POST" action="/programme/{{$prog_id}}/remove_prog_courses">
+            <form method="POST" action="/programme/{{$prog_id}}/remove_prog_elective_courses">
                 {{ csrf_field() }}
                 @foreach ($progCourses as $course)
                 <div class="form-check">
@@ -50,7 +50,7 @@
                 @endforeach
                 <div class="row">
                     <div class="col-md-12 my-3">
-                        <button type="submit" class="btn btn-outline-success btn-block">Remove Courses from
+                        <button type="submit" class="btn btn-outline-success btn-block">Remove Elective Courses from
                             Programme</button>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
         <div class="col-md-6">
             <h1 class="text-center">FOCS Course List</h1>
             @if (count($facultyCourses) !== 0)
-            <form method="POST" action="/programme/{{$prog_id}}/add_prog_courses" enctype="multipart/form-data">
+            <form method="POST" action="/programme/{{$prog_id}}/add_prog_elective_courses" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 @foreach ($facultyCourses as $course)
                 <div class="form-check">
@@ -72,7 +72,7 @@
                 @endforeach
                 <div class="row">
                     <div class="col-md-12 my-3">
-                        <button type="submit" class="btn btn-outline-success btn-block">Add Courses to
+                        <button type="submit" class="btn btn-outline-success btn-block">Add Elective Courses to
                             Programme</button>
                     </div>
                 </div>

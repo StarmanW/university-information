@@ -41,6 +41,10 @@ class EnforceForeignKeys extends Migration
             $table->foreign('course_id')->references('id')->on('courses');
         });
 
+        Schema::table('courses', function (Blueprint $table) {
+            $table->foreign('faculty_id')->references('id')->on('faculties');
+        });
+
         Schema::table('campus_programmes', function (Blueprint $table) {
             $table->foreign('prog_id')->references('id')->on('programmes');
             $table->foreign('campus_id')->references('id')->on('campuses');
@@ -89,6 +93,10 @@ class EnforceForeignKeys extends Migration
         Schema::table('programme_courses', function (Blueprint $table) {
             $table->dropForeign('prog_id');
             $table->dropForeign('course_id');
+        });
+
+        Schema::table('courses', function (Blueprint $table) {
+            $table->dropForeign('faculty_id');
         });
 
         Schema::table('campus_programmes', function (Blueprint $table) {
