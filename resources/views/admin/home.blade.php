@@ -11,6 +11,7 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Name</th>
                                 <th>Email</th>
                                 <th colspan="2">Role</th>
                                 <th></th>
@@ -20,6 +21,11 @@
                             @foreach ($users as $user)
                             <tr>
                                 <td>{{ $user->id }}</td>
+                                @if ($user->role === 'Admin')
+                                    <td>{!! \App\Model\Admin::find($user->id)->name !!}</td>
+                                @else
+                                    <td>{!! \App\Model\FacultyStaff::find($user->id)->name !!}</td>
+                                @endif
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->role }}</td>
                                 <td><a href="/admin/edit/id={{ $user->id }}">Edit</a></td>

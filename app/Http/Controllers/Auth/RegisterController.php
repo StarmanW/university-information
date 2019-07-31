@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Model\Admin;
+use App\Model\FacultyStaff;
 use App\Model\Faculty;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Validation\Rule;
 
 class RegisterController extends Controller {
@@ -55,27 +60,31 @@ use RegistersUsers;
                         'role' => ['required', 'string', Rule::in(['Admin'])]
             ]);
         } else if ($data['role'] === 'Staff') {
-            if (Faculty::where('faculty_name', '=', $data['faculty'])->first()) {
-                return Validator::make($data, [
-                            'name' => ['required', 'string', 'regex:/^[A-z\(\)\-\@\ ]{1,255}$/'],
-                            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                            'password' => ['required', 'string', 'min:8', 'confirmed'],
-                            //problem
-                            'role' => ['required', 'string', Rule::in(['Staff'])],
-                            //problem
-                            'faculty' => ['required', 'string', 'regex:/^[A-z\(\)\-\@\, ]{2,255}$/'],
-                            'specialization' => ['nullable', 'string', 'regex:/^[A-z\(\)\-\@\, ]{0,255}$/'],
-                            'interest' => ['nullable', 'string', 'regex:/^[A-z\(\)\-\@\, ]{0,255}$/'],
-                            'position' => ['required', 'string', Rule::in(['Dean', 'Lecturer', 'Tutor'])]
-                ]);
-            } else {
-                //problem
-                return redirect()->back()->with('addStatus', false);
-            }
+            return Validator::make($data, [
+                        'name' => ['required', 'string', 'regex:/^[A-z\(\)\-\@\ ]{1,255}$/'],
+                        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                        'password' => ['required', 'string', 'min:8', 'confirmed'],
+                        'role' => ['required', 'string', Rule::in(['Staff'])],
+                        'faculty' => ['required', 'string', 'exists:faculties,id','regex:/^[A-z]{4}$/'],
+                        'specialization' => ['required', 'string', 'regex:/^[A-z\(\)\-\@\, ]{0,255}$/'],
+                        'interest' => ['required', 'string', 'regex:/^[A-z\(\)\-\@\, ]{0,255}$/'],
+                        'position' => ['required', 'string', Rule::in(['Dean', 'Lecturer', 'Tutor'])]
+            ]);
         }
+    }
 
+    public function register(Request $request) {
+        if ($request->input('role') === 'Admin' || $request->input('role') === 'Staff') {
+            $this->validator($request->all())->validate();
 
-        //mk validator for staff
+            event(new Registered($user = $this->create($request->all())));
+
+            $this->guard()->login($user);
+
+            return $this->registered($request, $user) ?: redirect($this->redirectPath());
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**
@@ -85,18 +94,34 @@ use RegistersUsers;
      * @return \App\User
      */
     protected function create(array $data) {
-        $user = User::create([request(),
-                    'name' => $data['name'],
-                    'email' => $data['email'],
-                    'password' => Hash::make($data['password']),
-                    'role' => $data['role'],
-        ]);
+        $user;
+        $userAdmin;
+        $userStaff;
 
+        $user = new User();
+        $user->role = $data['role'];
+        $user->email = $data['email'];
+        $user->password = Hash::make($data['password']);
+        $userSaved = $user->save();
 
-//        if($data) {
-//            new Admin
-//            save
-//        }
+        if ($data['role'] === 'Admin') {
+            $userAdmin = new Admin();
+            $userAdmin->id = $user->id;
+            $userAdmin->user_id = $user->id;
+            $userAdmin->name = $data['name'];
+            $userAdminSaved = $userAdmin->save();
+        } else {
+            $userStaff = new FacultyStaff();
+            $userStaff->id = $user->id;
+            $userStaff->user_id = $user->id;
+            $userStaff->name = $data['name'];
+            $userStaff->faculty_id = $data['faculty'];
+            $userStaff->specialization = $data['specialization'];
+            $userStaff->area_of_interest = $data['interest'];
+            $userStaff->position = $data['position'];
+            $userStaffSaved = $userStaff->save();
+        }
+        
         return $user;
     }
 

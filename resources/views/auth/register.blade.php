@@ -85,7 +85,7 @@
                             <div class="col-md-6">
                                 <select name="faculty" class="form-control @error('faculty') is-invalid @enderror">
                                     @foreach ($faculties as $faculty)
-                                    <option  value="{{ $faculty->faculty_name }}" @if(old('faculty') === '{{ $faculty->faculty_name }}'){{ 'selected="selected"' }}@endif>{{ $faculty->faculty_name }}</option>
+                                    <option  value="{{ $faculty->id }}" @if(old('faculty') === '{{ $faculty->faculty_name }}'){{ 'selected="selected"' }}@endif>{{ $faculty->faculty_name }}</option>
                                     @endforeach
                                 </select>
 
@@ -98,10 +98,10 @@
                         </div>
 
                         <div class="form-group row staff" style="display: none">
-                            <label for="specialization" class="col-md-4 col-form-label text-md-right">{{ __('Specialization') }}</label>
+                            <label for="specialization" class="col-md-4 col-form-label text-md-right">{{ __('Specialization') }} required</label>
 
                             <div class="col-md-6">
-                                <textarea id="specialization" rows="4" cols="20" class="form-control @error('specialization') is-invalid @enderror" name="specialization" autocomplete="specialization"></textarea>
+                                <textarea id="specialization" rows="4" cols="20" class="form-control @error('specialization') is-invalid @enderror" name="specialization" autocomplete="specialization">{{ old('specialization') }}</textarea>
 
                                 @error('specialization')
                                 <span class="invalid-feedback" role="alert">
@@ -112,10 +112,10 @@
                         </div>
 
                         <div class="form-group row staff" style="display: none">
-                            <label for="interest" class="col-md-4 col-form-label text-md-right">{{ __('Area(s) of Interest') }}</label>
+                            <label for="interest" class="col-md-4 col-form-label text-md-right">{{ __('Area(s) of Interest') }} required</label>
 
                             <div class="col-md-6">
-                                <textarea id="interest" rows="4" cols="20" class="form-control @error('interest') is-invalid @enderror" name="interest" autocomplete="interest"></textarea>
+                                <textarea id="interest" rows="4" cols="20" class="form-control @error('interest') is-invalid @enderror" name="interest" autocomplete="interest">{{ old('interest') }}</textarea>
 
                                 @error('interest')
                                 <span class="invalid-feedback" role="alert">

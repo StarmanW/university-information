@@ -14,7 +14,7 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $users = User::paginate(10);
+        $users = User::all();
         return view('admin.home')->with('users', $users);
     }
 }
