@@ -7,6 +7,7 @@ use App\Model\Admin;
 use App\Model\FacultyStaff;
 use App\Model\Faculty;
 use App\Http\Controllers\Controller;
+use App\CustomClass\CentralValidator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -35,6 +36,7 @@ use RegistersUsers;
      * @var string
      */
     protected $redirectTo = '/login';
+    private $validator;
 
     /**
      * Create a new controller instance.
@@ -43,6 +45,7 @@ use RegistersUsers;
      */
     public function __construct() {
         $this->middleware('guest');
+        $this->validator = new CentralValidator();
     }
 
     /**
@@ -53,23 +56,9 @@ use RegistersUsers;
      */
     protected function validator(array $data) {
         if ($data['role'] === 'Admin') {
-            return Validator::make($data, [
-                        'name' => ['required', 'string', 'regex:/^[A-z\(\)\-\@\ ]{1,255}$/'],
-                        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                        'password' => ['required', 'string', 'min:8', 'confirmed'],
-                        'role' => ['required', 'string', Rule::in(['Admin'])]
-            ]);
-        } else if ($data['role'] === 'Staff') {
-            return Validator::make($data, [
-                        'name' => ['required', 'string', 'regex:/^[A-z\(\)\-\@\ ]{1,255}$/'],
-                        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                        'password' => ['required', 'string', 'min:8', 'confirmed'],
-                        'role' => ['required', 'string', Rule::in(['Staff'])],
-                        'faculty' => ['required', 'string', 'exists:faculties,id','regex:/^[A-z]{4}$/'],
-                        'specialization' => ['required', 'string', 'regex:/^[A-z\(\)\-\@\, ]{0,255}$/'],
-                        'interest' => ['required', 'string', 'regex:/^[A-z\(\)\-\@\, ]{0,255}$/'],
-                        'position' => ['required', 'string', Rule::in(['Dean', 'Lecturer', 'Tutor'])]
-            ]);
+                return $this->validator->validateRegisterAdmin($data);
+            } else if ($data['role'] === 'Staff') {
+                return $this->validator->validateRegisterStaff($data);
         }
     }
 
