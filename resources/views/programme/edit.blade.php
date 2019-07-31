@@ -103,6 +103,14 @@
                     @endforeach
                 </div>
 
+                <div class="row my-3">
+                    <div class="col-md-6">
+                        <a type="button" href="/programme/{{$programme->id}}/courses" class="btn btn-outline-primary btn-block">Manage Course</a>
+                    </div>
+                    <div class="col-md-6">
+                        <a type="button" href="/programme/{{$programme->id}}/elective_courses" class="btn btn-outline-primary btn-block">Manage Elective Course</a>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-outline-success btn-block">Update Programme</button>

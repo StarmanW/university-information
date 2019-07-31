@@ -13,4 +13,9 @@ class Course extends Model
     {
         return $this->hasMany('App\Model\ProgrammeCourse', 'course_id', 'id');
     }
+
+    public function faculty()
+    {
+        return $this->hasMany('App\Model\Faculty', 'faculty_id', 'id');
+    }
 }
