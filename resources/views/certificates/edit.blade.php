@@ -61,8 +61,11 @@
                     @endforeach
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12">
+                <div class="row mt-2">
+                    <div class="col-md-6">
+                        <a href="/certificates" type="button" class="btn btn-outline-primary btn-block">Back</a>
+                    </div>
+                    <div class="col-md-6">
                         <button type="submit" class="btn btn-outline-success btn-block">Update Certificate</button>
                     </div>
                 </div>

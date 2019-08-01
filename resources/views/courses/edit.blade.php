@@ -66,7 +66,10 @@
                 @enderror
 
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
+                        <a href="/courses" type="button" class="btn btn-outline-primary btn-block">Back</a>
+                    </div>
+                    <div class="col-md-6">
                         <button type="submit" class="btn btn-outline-success btn-block">Update Course</button>
                     </div>
                 </div>

@@ -4,42 +4,59 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-responsive sortable">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Programme</th>
-                        <th>Programme Name</th>
-                        <th>Programme Level</th>
-                        <th>Duration of Study</th>
-                        <th>No. of Subjects</th>
-                        <th>No. of Elective Subjects</th>
-                        <th>No. of Professional Certificates</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($programmes as $prog)
-                    <tr>
-                        <td>{{$prog->id}}</td>
-                        <td>{{$prog->prog_name}}</td>
-                        <td>{{$prog->prog_level}}</td>
-                        <td>{{$prog->prog_duration}}</td>
-                        <td>{{count($prog->programmeCourses)}}</td>
-                        <td>{{count($prog->programmeCourses->where('is_elective', '=', 1))}}</td>
-                        <td>{{count($prog->programmeCertificates)}}</td>
-                        <td>
-                            <a type="button" href="/programme/{{$prog->id}}/view" name="view_btn"
-                                id="view_btn" class="btn btn-outline-success btn-md btn-block">View</a>
-                        </td>
-                        <td>
-                            <a type="button" href="/programme/{{$prog->id}}/edit" name="edit_btn"
-                                id="edit_btn" class="btn btn-outline-primary btn-md btn-block">Edit</a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            <h2 class="text-center mb-4 font-weight-bold">{{$prog->id}} - {{$prog->prog_name}}</h2>
+            <hr>
+            <h5>Programme Level:</h5>
+            <p>{{$prog->prog_level}}</p>
+
+            <h5>Programme Overview:</h5>
+            <p>{!! nl2br(e($prog->prog_desc)) !!}</p>
+
+            <h5>Duration:</h5>
+            <p>{{$prog->prog_duration}} years</p>
+
+            <h5>Minimum Entry Requirements:</h5>
+            <p>{!! nl2br(e($prog->prog_mer)) !!}</p>
+
+            <hr>
+            <h2 class="text-center font-weight-bold">Programme Outline</h2>
+            <h5>Programme Main Courses:</h5>
+            <ol>
+                @foreach ($prog->programmeCourses as $progCourse)
+                @if ($progCourse->is_elective === 0)
+                <li>{{$progCourse->courses->course_name}}</li>
+                @endif
+                @endforeach
+            </ol>
+
+            <h5>Programme Elective Courses:</h5>
+            <ol>
+                @foreach ($prog->programmeCourses as $progCourse)
+                @if ($progCourse->is_elective === 1)
+                <li>{{$progCourse->courses->course_name}}</li>
+                @endif
+                @endforeach
+            </ol>
+
+            <hr>
+            <h5>Campuses Offered:</h5>
+            <ol>
+                @foreach ($prog->campusProgrammes as $campProg)
+                <li>{{$campProg->campuses->campus_name}}</li>
+                @endforeach
+            </ol>
+
+            <h5>Professional Certification:</h5>
+            <ol>
+                @foreach ($prog->programmeCertificates as $cert)
+                <li>{{$cert->certificates->cert_name}} - {{$cert->certificates->cert_desc}}</li>
+                @endforeach
+            </ol>
+            <div class="row">
+                <div class="col-md-12 my-2">
+                    <a class="btn btn-outline-primary btn-block" href="/programme" role="button">Back</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

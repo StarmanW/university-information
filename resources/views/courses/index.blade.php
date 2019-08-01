@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-12 mx-auto">
+        <div class="col-md-7 mx-auto">
             <table class="table table-responsive sortable">
                 <thead class="thead-dark">
                     <tr>
@@ -22,7 +22,7 @@
                         <td>{{$course->course_cred_hour}}</td>
                         <td>{{$course->course_fee}}</td>
                         <td>
-                        <a type="button" href="/courses/{{$course->id}}/edit" name="edit_view_btn" id="edit_view_btn" class="btn btn-primary btn-md btn-block">Edit/View</a>
+                        <a type="button" href="/courses/{{$course->id}}/edit" name="edit_view_btn" id="edit_view_btn" class="btn btn-primary btn-md btn-block">Edit</a>
                         </td>
                     </tr>
                     @endforeach

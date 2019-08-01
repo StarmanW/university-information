@@ -43,7 +43,7 @@
                 @foreach ($progCourses as $course)
                 <div class="form-check">
                     <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" name="prog_courses[]" value="{{$course->id}}" >
+                        <input type="checkbox" class="form-check-input" name="prog_courses[]" value="{{$course->id}}">
                         {{$course->course_id}} {{$course->courses->course_name}}
                     </label>
                 </div>
@@ -65,7 +65,8 @@
                 @foreach ($facultyCourses as $course)
                 <div class="form-check">
                     <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" name="faculty_courses[]" value="{{$course->id}}">
+                        <input type="checkbox" class="form-check-input" name="faculty_courses[]"
+                            value="{{$course->id}}">
                         {{$course->id}} {{$course->course_name}}
                     </label>
                 </div>
@@ -78,6 +79,11 @@
                 </div>
             </form>
             @endif
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 my-2">
+            <a class="btn btn-outline-primary btn-block" href="/programme/{{$prog_id}}/edit" role="button">Back</a>
         </div>
     </div>
 </div>

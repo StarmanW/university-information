@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8 mx-auto">
             <table class="table table-responsive sortable">
                 <thead class="thead-dark">
                     <tr>
@@ -18,10 +18,10 @@
                     <tr>
                         <td>{{$cert->id}}</td>
                         <td>{{$cert->cert_name}}</td>
-                        <td>{{$cert->cert_desc}}</td>
+                        <td>{{str_limit($cert->cert_desc, $limit = 50, $end = '...')}}</td>
                         <td>
-                            <a type="button" href="/certificates/{{$cert->id}}/edit" name="edit_view_btn"
-                                id="edit_view_btn" class="btn btn-primary btn-md btn-block">Edit/View</a>
+                            <a type="button" href="/certificates/{{$cert->id}}/edit" name="edit_btn"
+                                id="edit_btn" class="btn btn-primary btn-md btn-block">Edit</a>
                         </td>
                     </tr>
                     @endforeach

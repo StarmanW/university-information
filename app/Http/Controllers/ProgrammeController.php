@@ -5,14 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Patterns\Strategy\AddProgramme;
 use App\Patterns\Strategy\Context;
-use Illuminate\Support\Facades\Validator;
 use App\Patterns\Strategy\DisplayProgramme;
 use App\XML\CampusDOMParser;
 use App\Patterns\Strategy\UpdateProgramme;
 use App\Model\Programme;
+use App\CustomClass\CentralValidator;
 
 class ProgrammeController extends Controller
 {
+    private $validator;
+
+    public function __construct()
+    {
+        $this->validator = new CentralValidator();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +35,6 @@ class ProgrammeController extends Controller
     public function show($id)
     {
         $prog = Programme::find($id);
-        dd($prog);
         return view('programme.view')->with('prog', $prog);
     }
 
@@ -53,14 +59,7 @@ class ProgrammeController extends Controller
     public function store(Request $request)
     {
         //Validate Data
-        $validator = Validator::make($request->all(), [
-            'prog_id' => ['required', 'string', 'max:3', 'regex:/^[A-Z]{3}$/', 'unique:programmes,id'],
-            'prog_name' => ['required', 'string', 'min:2', 'max:255', 'regex:/^[A-z\(\)\-\@\, ]{2,255}$/'],
-            'prog_desc' => ['required', 'string', 'min:2', 'regex:/^[\w\W\d\D]+$/'],
-            'prog_mer' => ['required', 'string', 'min:2', 'regex:/^[\w\W\d\D]+$/'],
-            'prog_duration' => 'required|integer|min:1|max:4',
-            'prog_level' => 'required', 'string', 'regex:/^(Diploma|Bachelor Degree|Master|Doctorate \(PhD\))$/'
-        ]);
+        $validator = $this->validator->validateRegisterProgramme($request);
 
         // Adding of new programme
         if ($validator->fails()) {
@@ -102,13 +101,7 @@ class ProgrammeController extends Controller
     public function update(Request $request, $id)
     {
         //Validate Data
-        $validator = Validator::make($request->all(), [
-            'prog_name' => ['required', 'string', 'min:2', 'max:255', 'regex:/^[A-z\(\)\-\@\, ]{2,255}$/'],
-            'prog_desc' => ['required', 'string', 'min:2', 'regex:/^[\w\W\d\D]+$/'],
-            'prog_mer' => ['required', 'string', 'min:2', 'regex:/^[\w\W\d\D]+$/'],
-            'prog_duration' => 'required|integer|min:1|max:4',
-            'prog_level' => 'required', 'string', 'regex:/^(Diploma|Bachelor Degree|Master|Doctorate \(PhD\))$/'
-        ]);
+        $validator = $this->validator->validateEditProgramme($request);
 
         // Adding of new programme
         if ($validator->fails()) {

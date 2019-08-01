@@ -4,13 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\Course;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Model\ProgrammeCourse;
 use App\Model\Programme;
+use App\CustomClass\CentralValidator;
 
 class CourseController extends Controller
 {
+    private $validator;
+
+    public function __construct()
+    {
+        $this->validator = new CentralValidator();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -41,14 +48,7 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //Validate Data
-        $validator = Validator::make($request->all(), [
-            'course_id' => ['required', 'string', 'min:2', 'max:255', 'regex:/^[A-Z\-]{4}\d{4}$/'],
-            'course_name' => ['required', 'string', 'min:2', 'max:255', 'regex:/^[A-z\(\)\-\@\, ]{2,255}$/'],
-            'course_desc' => ['required', 'string', 'min:2', 'max:255', 'regex:/^[\w\W\d\D]+$/'],
-            'course_cred_hour' => ['required', 'string', 'min:1', 'max:4', 'regex:/^[1-4]$/'],
-            'course_fee' => ['required', 'numeric'],
-        ]);
+        $validator = $this->validator->valdiateRegisterCourse($request);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -56,6 +56,7 @@ class CourseController extends Controller
             // Add new course
             $course = new Course();
             $course->id = $request->input('course_id');
+            $course->faculty_id = 'FOCS';   // Auth::user()->facultyStaffs->faculty_id;
             $course->course_name = $request->input('course_name');
             $course->course_desc = $request->input('course_desc');
             $course->course_cred_hour = $request->input('course_cred_hour');
@@ -90,13 +91,7 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //Validate Data
-        $validator = Validator::make($request->all(), [
-            'course_name' => ['required', 'string', 'min:2', 'max:255', 'regex:/^[A-z\(\)\-\@\, ]{2,255}$/'],
-            'course_desc' => ['required', 'string', 'min:2', 'max:255', 'regex:/^[\w\W\d\D]+$/'],
-            'course_cred_hour' => ['required', 'string', 'min:1', 'max:4', 'regex:/^[1-4]$/'],
-            'course_fee' => ['required', 'numeric'],
-        ]);
+        $validator = $this->validator->valdiateEditCourse($request);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
