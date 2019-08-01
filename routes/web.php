@@ -27,6 +27,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/programme', 'ProgrammeController@index');
 Route::get('/programme/add', 'ProgrammeController@create');
 Route::post('/programme/add', 'ProgrammeController@store');
+Route::get('/programme/{id}/view', 'ProgrammeController@show');
 Route::get('/programme/{id}/edit', 'ProgrammeController@edit');
 Route::post('/programme/{id}/edit', 'ProgrammeController@update');
 
