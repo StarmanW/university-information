@@ -108,8 +108,11 @@
                     @endforeach
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12">
+                <div class="row my-2">
+                    <div class="col-md-6">
+                        <button type="reset" class="btn btn-outline-primary btn-block">Reset</button>
+                    </div>
+                    <div class="col-md-6">
                         <button type="submit" class="btn btn-outline-success btn-block">Add New Programme</button>
                     </div>
                 </div>
