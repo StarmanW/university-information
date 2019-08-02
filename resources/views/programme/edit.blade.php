@@ -92,7 +92,8 @@
                     <label for="">Campuses Offered:</label><br />
                     @foreach ($campuses as $campus)
                     <input type="checkbox" class="form-check-input" name="branch_offered[]" id="branch_{{$campus->id}}"
-                        value="{{$campus->id}}" @if (count($programme->campusProgrammes->where('campus_id', '=', $campus->id)) === 1) {{"checked"}} @endif>
+                        value="{{$campus->id}}" @if (count($programme->campusProgrammes->where('campus_id', '=',
+                    $campus->id)) === 1) {{"checked"}} @endif>
                     <label class="form-check-label" for="branch_{{$campus->id}}">
                         {{$campus->campus_name}}
                     </label>
@@ -104,18 +105,21 @@
                 </div>
 
                 <div class="row my-3">
-                    <div class="col-md-4">
-                        <a type="button" href="/programme/{{$programme->id}}/courses" class="btn btn-outline-primary btn-block">Manage Course</a>
+                    <div class="col-md-6">
+                        <a type="button" href="/programme/{{$programme->id}}/courses"
+                            class="btn btn-outline-primary btn-block">Manage Course</a>
                     </div>
-                    <div class="col-md-4">
-                        <a type="button" href="/programme/{{$programme->id}}/elective_courses" class="btn btn-outline-primary btn-block">Manage Elective Course</a>
+                    <div class="col-md-6">
+                        <a type="button" href="/programme/{{$programme->id}}/elective_courses"
+                            class="btn btn-outline-primary btn-block">Manage Elective Course</a>
                     </div>
-                    <div class="col-md-4">
-                        <a type="button" href="/programme/" class="btn btn-outline-primary btn-block"> Back</a>
-                    </div>
+
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
+                        <a type="button" href="/programme/" class="btn btn-outline-primary btn-block"> Back</a>
+                    </div>
+                    <div class="col-md-6">
                         <button type="submit" class="btn btn-outline-success btn-block">Update Programme</button>
                     </div>
                 </div>

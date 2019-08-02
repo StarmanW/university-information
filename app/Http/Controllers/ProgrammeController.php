@@ -116,4 +116,15 @@ class ProgrammeController extends Controller
             }
         }
     }
+
+    public function delete($id)
+    {
+        $prog = Programme::find($id);
+        $prog->campusProgrammes()->delete();
+        $prog->programmeCourses()->delete();
+        $prog->programmeCertificates()->delete();
+        $prog->programmeLoans()->delete();
+        $prog->delete();
+        return redirect()->back()->with('deleteStatus', true);
+    }
 }

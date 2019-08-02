@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Model\ProgrammeCourse;
 use App\Model\Programme;
 use App\CustomClass\CentralValidator;
+use DOMDocument;
+use XSLTProcessor;
+use SimpleXMLElement;
 
 class CourseController extends Controller
 {
@@ -26,7 +29,41 @@ class CourseController extends Controller
     public function index()
     {
         $courses = Course::all();
+
+        $jSON = json_decode($courses, true);
+        $xmlCourseData = $this->array2xml($jSON, false);
+        
+        $xml = new DOMDocument('1.0', 'UTF-8');
+        $xslt = $xml->createProcessingInstruction('xml-stylesheet', 'type="text/xsl" href="course_list.xsl"');
+        $xml->appendChild($xslt);
+        $xml->loadXML($xmlCourseData);
+
+        // Load XSLT file
+        $xsl = new DOMDocument();
+        $xsl->load(asset('storage/xml/course_list.xsl'));
+
+        // Create XSLT Processor
+        $proc = new XSLTProcessor();
+        $proc->importStyleSheet($xsl);
+
+        $courses = $proc->transformToXML($xml);
         return view('courses.index')->with('courses', $courses);
+    }
+
+    public function array2xml($array, $xml = false)
+    {
+        if ($xml === false) {
+            $xml = new SimpleXMLElement('<courseList/>');
+        }
+
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $this->array2xml($value, $xml->addChild("course"));
+            } else {
+                $xml->addChild($key, $value);
+            }
+        }
+        return $xml->asXML();
     }
 
     /**
@@ -142,7 +179,7 @@ class CourseController extends Controller
             }
         }
         return redirect()->back()->with('successRemoveProgCourses', true);
-     }
+    }
 
     public function electiveCourses(Request $request, $id)
     {
@@ -150,10 +187,10 @@ class CourseController extends Controller
         $facultyCourses = Course::whereNotIn('id', $existingProgCourse)->get();
         $progCourses = ProgrammeCourse::where('is_elective', '=', 1)->where('prog_id', '=', $id)->get();
         return view('programme.elective_course', ['facultyCourses' => $facultyCourses, 'progCourses' => $progCourses, 'prog_id' => $id]);
-     }
+    }
 
     public function addProgElectiveCourses(Request $request, $id)
-    { 
+    {
         if (Programme::where('id', $id)->exists()) {
             foreach ($request->input('faculty_courses') as $courseID) {
                 $programmeCourse = new ProgrammeCourse();
@@ -175,5 +212,13 @@ class CourseController extends Controller
             }
         }
         return redirect()->back()->with('successRemoveProgElectiveCourses', true);
-     }
+    }
+
+    public function delete($id)
+    {
+        $course = Course::find($id);
+        $course->programmeCourses()->delete();
+        $course->delete();
+        return redirect()->back()->with('deleteStatus', true);
+    }
 }

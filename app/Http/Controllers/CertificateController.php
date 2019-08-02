@@ -129,4 +129,12 @@ class CertificateController extends Controller
             }
         }
     }
+
+    public function delete($id)
+    {
+        $cert = Certificate::find($id);
+        $cert->programmeCertificates()->delete();
+        $cert->delete();
+        return redirect()->back()->with('deleteStatus', true);
+    }
 }
