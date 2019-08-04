@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT campuses (campus)*>
+<!ELEMENT campus (id , campus_name, campus_desc, campus_location)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT campus_name (#PCDATA)>
+<!ELEMENT campus_desc (#PCDATA)>
+<!ELEMENT campus_location (#PCDATA)>
+

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE campuses SYSTEM 'campus.dtd'>
+
+<campuses>
+    <campus>
+        <id>1</id>
+        <campus_name>Kuala Lumpur Main Campus</campus_name>
+        <campus_desc>Covering approximately 186 acres of land, the Kuala Lumpur Main Campus (‘KL Main Campus’) is the flagship campus in TAR UC that boasts a student population of approximately 18,000. Strategically situated approximately within a ten-kilometre radius of Kuala Lumpur City Centre yet surrounded by lush and hilly greeneries, the KL Main Campus promises a comfortable and conducive study environment unlike any other. The KL Main Campus is also equipped with top-notch academic facilities that will help students excel in their studies and recreational facilities that offer students a balanced lifestyle.
+ 
+
+THINGS TO DO
+
+Students at our KL Main Campus will find a plethora of things to do in their free time. The town of Setapak, located within the Gombak district, always has something which will pique your interest regardless if you are a food hunter, travel junkie or adventure seeker.
+
+Even if you prefer to explore outside the local region, Kuala Lumpur will always be within reach – a 20-minute drive will bring you into the heart of the city. There are always other options available at your fingertips too, thanks to accessible public transportation including buses, taxi, the LRT, MRT, and even e-hailing services like Grab!</campus_desc>
+        <campus_location>Jalan Genting Kelang, Setapak,53300 Kuala Lumpur,P.O. Box 10979, 50932 Kuala Lumpur, Malaysia.</campus_location>
+    </campus>
+    <campus>
+        <id>2</id>
+        <campus_name>Penang Branch Campus</campus_name>
+        <campus_desc>Occupying 23 acres of land located at the prime tourist belt of Tanjong Bungah, TAR UC Penang Branch Campus has proven itself to be an institution of academic excellence, attracting thousands of students from all over the different states in the Northern Region of Peninsular Malaysia. The campus comprises of a team of professionally qualified academics who inspire and lead students towards achieving academic excellence. The campus is also strategically located – nestled between the lush greenery and scenic beach – and it is only a 15-minute drive from Georgetown.</campus_desc>
+        <campus_location>77, Lorong Lembah Permai Tiga,11200 Tanjong Bungah,Pulau Pinang, Malaysia.</campus_location>
+    </campus>
+    <campus>
+        <id>3</id>
+        <campus_name>Perak Branch Campus</campus_name>
+        <campus_desc>The Perak Branch Campus first began operations on 5 January 1998 at temporary premises of 5 shoplots in Kampar, and relocated to its campus built on a sprawling 50 acres of land. Tucked amidst lush greenery, scenic lakes and located within a growing township, the Perak Branch Campus offers conducive and community-fostering setting which enhances holistic learning.
+
+The purpose built campus is equipped with various facilities and recreational amenities, providing an ideal study environment for all students.
+
+    Auditorium
+    Administration Block
+    Resource Centre
+    Clubhouse with an Olympic-sized swimming pool
+    Student Center with canteen facilities
+    Hospitality Management Block
+    Lecture Halls and Mini Lecture Halls
+    Lecture and tutorial blocks
+        </campus_desc>
+        <campus_location>Jalan Kolej, Taman Bandar Baru,31900 Kampar, Perak, Malaysia.</campus_location>
+    </campus>
+    <campus>
+        <id>4</id>
+        <campus_name>Johor Branch Campus</campus_name>
+        <campus_desc>TAR UC’s excellence in education is well-recognised across the southern region of Peninsular Malaysia as demonstrated by TAR UC’s Johor Branch Campus located in Segamat town. The 50-acre beautiful landscaped campus surrounded by lush greenery is approximately 20-minute drive from Segamat town. With a comprehensive array of facilities such as Training Kitchen and Restaurant, Bakery Kitchen, Mock Hotel, Aquaculture Lab and Mushroom Cultivation House, the students at Johor Branch Campus are well-trained professionally to be industry ready.</campus_desc>
+        <campus_location>Jalan Segamat / Labis85000 Segamat, JohorMalaysia.</campus_location>
+    </campus>
+    <campus>
+        <id>5</id>
+        <campus_name>Pahang Branch Campus</campus_name>
+        <campus_desc>Pahang Branch Campus is located on an impressive 15-acre lush greenery in the heart of Indera Mahkota town; a 20-minute drive from Kuantan. The campus is equipped with various facilities, providing an ideal and comfortable learning environment.
+
+Kuantan town is situated in the eastern side of the Pahang state. It is the largest town in the East Coast of Peninsular Malaysia. Kuantan is a mere 277 km or around a 4-hour drive from Kuala Lumpur.
+
+SHOPPING
+There are a few established shopping malls in town; one of the most visited malls in the vicinity is the newly-opened Kuantan City Mall– the biggest in town. The East Coast Mall in Putra Square, is the second largest shopping mall on the east coast and has been attracting patrons from as far away as Kelantan and Terengganu.</campus_desc>
+        <campus_location>Jalan IM 9/2,Indera Mahkota 9,25200 Kuantan, Pahang Darul Makmur, Malaysia.</campus_location>
+    </campus>
+    <campus>
+        <id>6</id>
+        <campus_name>Sabah Branch Campus</campus_name>
+        <campus_desc>The Sabah Branch began operations on 20 May 2002 and is the first and only Branch located in East Malaysia. The Branch is situated in Pusat Dagangan Donggongon, Penampang, Sabah.
+
+Donggongon Penampang is just a 30-minute drive from Kota Kinabalu City and is the gateway to some renowned tourist destinations such as Tambunan Rafflesia Information Centre, Kadazan Dusun Cultural Centre (KDCA), Lok Kawi Wildlife Park, Monsopiad Cultural Village, Kipandi Butterfly Park, the famous Mahua Waterfall at Tambunan and lots more.
+
+Sabah Branch is located in the middle of Donggongon town, where the famous Tamu (Market) is held every Thursday and Friday. Donggongon town is vibrant with lots of shops, shopping malls, banks and even a state library within walking distance, making it a conducive place to live as all the basic amenities is ready available. Bomba, Police station and Pos Malaysia is just few steps from the current campus branch campus.
+
+Penampang is a booming district with a lot of new developments and constructions, such as the International Technology &amp; Commercial Centre (ITCC), 360 Boulevard, C-Park Condos, malls and condominiums, making Penampang one of the fastest-growing towns after KK City.
+
+The current building is well equipped with modern infrastructure that is sufficient and conducive for students learning environment. Students will enjoy the fast speed wifi/ internet that are ready available throughout the campus and up to date computer software to help in students learning. The Branch campus are committed in providing a well-stocked library, well maintained lecture and tutorial rooms, recreational rooms with gym facilities, and security services for students and staff safety, as well as various extracurricular activities to enhance students campus life experience.</campus_desc>
+        <campus_location>Lot 1, Ground Floor,Pusat Dagangan Donggongon,Jalan Sapau,89500 Donggongon,Penampang, Sabah</campus_location>
+    </campus>
+</campuses>
