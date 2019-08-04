@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\Course;
-use Illuminate\Support\Facades\Auth;
 use App\Model\ProgrammeCourse;
 use App\Model\Programme;
 use App\CustomClass\CentralValidator;
@@ -29,11 +28,15 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::all();
+        // $certs = Certificate::all();
+        // $jSON = json_decode($certs, true);
+        // $xmlCourseData = $this->array2xml($jSON, false);
+        // return response($xmlCourseData)->header('Content-Type', 'application/xml');
 
-        $jSON = json_decode($courses, true);
+        $courses = CourseResource::collection(Course::all());
+        $jSON = json_decode($courses->collection, true);
         $xmlCourseData = $this->array2xml($jSON, false);
-        
+
         $xml = new DOMDocument('1.0', 'UTF-8');
         $xslt = $xml->createProcessingInstruction('xml-stylesheet', 'type="text/xsl" href="course_list.xsl"');
         $xml->appendChild($xslt);
@@ -65,6 +68,11 @@ class CourseController extends Controller
             }
         }
         return $xml->asXML();
+    }
+
+    public function getCourses()
+    {
+        return CourseResource::collection(Course::all());
     }
 
     /**
