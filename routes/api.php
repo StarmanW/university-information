@@ -21,4 +21,4 @@ Route::get('programmes', 'ProgrammeController@getProgrammes');
 Route::get('courses', 'Course@getCourses');
 Route::get('certificates', 'CertificateController@getCertificates');
 
-Route::get('/staff/info', 'AdminControllers\AdminController@getStaffInfo');
+Route::get('staff/info', 'StaffControllers\StaffController@getStaffInfo');
