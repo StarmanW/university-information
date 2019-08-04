@@ -36,7 +36,7 @@ use RegistersUsers;
      * @var string
      */
     protected $redirectTo = '/login';
-    private $validator;
+    private $centralValidator;
 
     /**
      * Create a new controller instance.
@@ -45,7 +45,7 @@ use RegistersUsers;
      */
     public function __construct() {
         $this->middleware('guest');
-        $this->validator = new CentralValidator();
+        $this->centralValidator = new CentralValidator();
     }
 
     /**
@@ -56,9 +56,11 @@ use RegistersUsers;
      */
     protected function validator(array $data) {
         if ($data['role'] === 'Admin') {
-                return $this->validator->validateRegisterAdmin($data);
-            } else if ($data['role'] === 'Staff') {
-                return $this->validator->validateRegisterStaff($data);
+            return $this->centralValidator->validateRegisterAdmin($data);
+        } else if ($data['role'] === 'Staff') {
+            return $this->centralValidator->validateRegisterStaff($data);
+        } else {
+            return redirect()->back()->withInput()->with('roleError', 'Please select an appropriate role');
         }
     }
 
@@ -99,7 +101,7 @@ use RegistersUsers;
             $userAdmin->user_id = $user->id;
             $userAdmin->name = $data['name'];
             $userAdminSaved = $userAdmin->save();
-        } else {
+        } elseif ($data['role'] === 'Staff') {
             $userStaff = new FacultyStaff();
             $userStaff->id = $user->id;
             $userStaff->user_id = $user->id;
@@ -109,9 +111,15 @@ use RegistersUsers;
             $userStaff->area_of_interest = $data['interest'];
             $userStaff->position = $data['position'];
             $userStaffSaved = $userStaff->save();
+        } else {
+            return redirect()->back()->withInput()->with('roleError', 'Please select an appropriate role');
         }
-        
-        return $user;
+
+        if ($userSaved) {
+            return $user;
+        } else {
+            return redirect()->back()->withInput()->with('registerUserError', 'Unable to save user data, please try again.');
+        }
     }
 
 }

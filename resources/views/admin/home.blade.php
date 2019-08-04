@@ -6,14 +6,14 @@
             <div class="card">
                 <div class="card-header"></div>
 
-                <div class="card-body">
-                    <table border="1">
-                        <thead>
+                <div class="card-body mx-auto">
+                    <table border="0" class="table table-responsive table-striped">
+                        <thead class="thead-dark">
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th colspan="2">Role</th>
+                                <th>Role</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -28,7 +28,7 @@
                                 @endif
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->role }}</td>
-                                <td><a href="/admin/edit/{{ $user->id }}">Edit</a></td>
+                                <td><a href="/admin/user/{{ $user->id }}/edit">Edit</a></td>
                             </tr>
                             @endforeach
                         </tbody>
