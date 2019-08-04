@@ -16,13 +16,11 @@ use Illuminate\Validation\Rule;
  *
  * @author sein
  */
-class CentralValidator
-{
+class CentralValidator {
 
     private $validationRules;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->validationRules = [
             //general
             'textWithSymbols' => ['required', 'string', 'regex:/^[A-z\(\)\-\@\,\& ]{0,255}$/'],
@@ -34,7 +32,7 @@ class CentralValidator
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'roleAdmin' => ['required', 'string', Rule::in(['Admin'])],
             'roleStaff' => ['required', 'string', Rule::in(['Staff'])],
-            'roleAdminOrStaff' => ['required', 'string',  Rule::in(['Admin', 'Staff'])],
+            'roleAdminOrStaff' => ['required', 'string', Rule::in(['Admin', 'Staff'])],
             'faculty' => ['required', 'string', 'exists:faculties,id', 'regex:/^[A-z]{4}$/'],
             'position' => ['required', 'string', Rule::in(['Dean', 'Lecturer', 'Tutor'])],
             //course
@@ -85,55 +83,51 @@ class CentralValidator
         ]);
     }
 
-    public function validateRegisterProgramme($request)
-    {
+    public function validateRegisterProgramme($request) {
         return Validator::make($request->all(), [
-            'prog_id' => $this->validationRules['prog_id'],
-            'prog_name' => $this->validationRules['textWithSymbols'],
-            'prog_desc' => $this->validationRules['textWithSymbols'],
-            'prog_mer' => $this->validationRules['textWithSymbols'],
-            'prog_duration' => $this->validationRules['numericDigitFour'],
-            'prog_level' => $this->validationRules['prog_level']
+                    'prog_id' => $this->validationRules['prog_id'],
+                    'prog_name' => $this->validationRules['textWithSymbols'],
+                    'prog_desc' => $this->validationRules['textWithSymbols'],
+                    'prog_mer' => $this->validationRules['textWithSymbols'],
+                    'prog_duration' => $this->validationRules['numericDigitFour'],
+                    'prog_level' => $this->validationRules['prog_level']
         ]);
     }
 
-    public function validateEditProgramme($request)
-    {
+    public function validateEditProgramme($request) {
         return Validator::make($request->all(), [
-            'prog_name' => $this->validationRules['textWithSymbols'],
-            'prog_desc' => $this->validationRules['textWithSymbols'],
-            'prog_mer' => $this->validationRules['textWithSymbols'],
-            'prog_duration' => $this->validationRules['numericDigitFour'],
-            'prog_level' => $this->validationRules['prog_level']
+                    'prog_name' => $this->validationRules['textWithSymbols'],
+                    'prog_desc' => $this->validationRules['textWithSymbols'],
+                    'prog_mer' => $this->validationRules['textWithSymbols'],
+                    'prog_duration' => $this->validationRules['numericDigitFour'],
+                    'prog_level' => $this->validationRules['prog_level']
         ]);
     }
 
-    public function valdiateRegisterCourse($request)
-    {
+    public function valdiateRegisterCourse($request) {
         return Validator::make($request->all(), [
-            'course_id' => $this->validationRules['course_id'],
-            'course_name' => $this->validationRules['textWithSymbols'],
-            'course_desc' => $this->validationRules['textWithSymbols'],
-            'course_cred_hour' => $this->validationRules['numericDigitFour'],
-            'course_fee' => $this->validationRules['numeric'],
+                    'course_id' => $this->validationRules['course_id'],
+                    'course_name' => $this->validationRules['textWithSymbols'],
+                    'course_desc' => $this->validationRules['textWithSymbols'],
+                    'course_cred_hour' => $this->validationRules['numericDigitFour'],
+                    'course_fee' => $this->validationRules['numeric'],
         ]);
     }
 
-    public function valdiateEditCourse($request)
-    {
+    public function valdiateEditCourse($request) {
         return Validator::make($request->all(), [
-            'course_name' => $this->validationRules['textWithSymbols'],
-            'course_desc' => $this->validationRules['textWithSymbols'],
-            'course_cred_hour' => $this->validationRules['numericDigitFour'],
-            'course_fee' => $this->validationRules['numeric'],
+                    'course_name' => $this->validationRules['textWithSymbols'],
+                    'course_desc' => $this->validationRules['textWithSymbols'],
+                    'course_cred_hour' => $this->validationRules['numericDigitFour'],
+                    'course_fee' => $this->validationRules['numeric'],
         ]);
     }
 
-    public function validateCertificate($request)
-    {
+    public function validateCertificate($request) {
         return Validator::make($request->all(), [
-            'cert_name' => $this->validationRules['textWithSymbols'],
-            'cert_desc' => $this->validationRules['textWithSymbols'],
+                    'cert_name' => $this->validationRules['textWithSymbols'],
+                    'cert_desc' => $this->validationRules['textWithSymbols'],
         ]);
     }
+
 }
