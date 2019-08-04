@@ -11,6 +11,7 @@ use App\CustomClass\CentralValidator;
 use DOMDocument;
 use XSLTProcessor;
 use SimpleXMLElement;
+use App\Http\Resources\Course as CourseResource;
 
 class CourseController extends Controller
 {

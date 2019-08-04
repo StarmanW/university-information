@@ -9,7 +9,7 @@ class DisplayProgramme implements ProgrammeMaintenance
     public function execute($request)
     {
         if ($request === null) {
-            $programme = Programme::paginate(15);
+            $programme = Programme::all();
             return $programme;
         } else {
             $programme = Programme::find($request);

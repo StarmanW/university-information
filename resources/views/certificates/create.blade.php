@@ -45,19 +45,8 @@
                 @enderror
 
                 {{-- Programme Incorporation Offered --}}
-                <div class="form-check">
+                <div class="form-check prog_incorp">
                     <label for="">Programmes Incorporation:</label><br />
-                    @foreach ($programmes as $prog)
-                    <input type="checkbox" class="form-check-input" name="prog_incor[]" id="prog_incorp_{{$prog->id}}"
-                        value="{{$prog->id}}">
-                    <label class="form-check-label" for="prog_incorp_{{$prog->id}}">
-                        {{$prog->prog_name}}
-                    </label>
-                    @error('prog_incor[]')
-                    <p class="text-danger font-weight-bold">{{ $message }}</p>
-                    @enderror
-                    <br />
-                    @endforeach
                 </div>
 
                 <div class="row my-2">
@@ -73,11 +62,5 @@
     </div>
 </div>
 
-<script>
-    (function() {
-        setTimeout(() => {
-            document.querySelector('.alert').remove();
-        }, 5000);
-    })();
-</script>
+<script src="/js/certificates.js"></script>
 @endsection

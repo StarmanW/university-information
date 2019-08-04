@@ -54,9 +54,6 @@
                     <label class="form-check-label" for="prog_incorp_{{$prog->id}}">
                         {{$prog->prog_name}}
                     </label>
-                    @error('prog_incor[]')
-                    <p class="text-danger font-weight-bold">{{ $message }}</p>
-                    @enderror
                     <br />
                     @endforeach
                 </div>
@@ -74,11 +71,5 @@
     </div>
 </div>
 
-<script>
-    (function() {
-        setTimeout(() => {
-            document.querySelector('.alert').remove();
-        }, 5000);
-    })();
-</script>
+<script src="/js/certificates.js"></script>
 @endsection

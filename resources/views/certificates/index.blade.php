@@ -30,26 +30,7 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach ($certificates as $cert)
-                    <tr>
-                        <td>{{$cert->id}}</td>
-                        <td>{{$cert->cert_name}}</td>
-                        <td>{{str_limit($cert->cert_desc, $limit = 50, $end = '...')}}</td>
-                        <td>
-                            <a type="button" href="/certificates/{{$cert->id}}/edit" name="edit_btn" id="edit_btn"
-                                class="btn btn-outline-primary btn-md btn-block">Edit</a>
-                        </td>
-                        <td>
-                            <a href="#" class="btn btn-outline-danger btn-block"
-                                onclick="deleteCertificate('{{$cert->id}}', '{{$cert->cert_name}}')">Delete</a>
-                            <form method="post" action="/certificates/{{$cert->id}}/delete" id="delete{{$cert->id}}"
-                                style="display: none;">
-                                {{csrf_field()}}
-                            </form>
-                        </td>
-                    </tr>
-                    @endforeach
+                <tbody class="cert_tbody">
                 </tbody>
             </table>
         </div>
@@ -58,4 +39,5 @@
 
 <script src="js/sorttable.js"></script>
 <script src="js/delete_utils.js"></script>
+<script src="js/certificates.js"></script>
 @endsection

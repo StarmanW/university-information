@@ -10,6 +10,7 @@ use App\XML\CampusDOMParser;
 use App\Patterns\Strategy\UpdateProgramme;
 use App\Model\Programme;
 use App\CustomClass\CentralValidator;
+use App\Http\Resources\Programme as ProgrammeResource;
 
 class ProgrammeController extends Controller
 {
@@ -30,6 +31,11 @@ class ProgrammeController extends Controller
         $context = new Context(new DisplayProgramme());
         $programmes = $context->executeStrategy();
         return view('programme.index')->with('programmes', $programmes);
+    }
+
+    public function getProgrammes()
+    {
+        return ProgrammeResource::collection(Programme::all());
     }
 
     public function show($id)

@@ -7,6 +7,7 @@ use App\Model\Certificate;
 use App\Model\Programme;
 use App\Model\ProgrammeCertificate;
 use App\CustomClass\CentralValidator;
+use App\Http\Resources\Certificate as CertificateResource;
 
 class CertificateController extends Controller
 {
@@ -24,10 +25,13 @@ class CertificateController extends Controller
      */
     public function index()
     {
-        $certificates = Certificate::all();
-        return view('certificates.index')->with('certificates', $certificates);
+        return view('certificates.index');
     }
 
+    public function getCertificates() {
+        return CertificateResource::collection(Certificate::all());
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -35,8 +39,7 @@ class CertificateController extends Controller
      */
     public function create()
     {
-        $programmes = Programme::all();
-        return view('certificates.create', ['programmes' => $programmes]);
+        return view('certificates.create');
     }
 
 

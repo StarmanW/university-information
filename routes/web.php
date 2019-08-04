@@ -30,6 +30,7 @@ Route::post('/programme/add', 'ProgrammeController@store');
 Route::get('/programme/{id}/view', 'ProgrammeController@show');
 Route::get('/programme/{id}/edit', 'ProgrammeController@edit');
 Route::post('/programme/{id}/edit', 'ProgrammeController@update');
+Route::post('/programme/{id}/delete', 'ProgrammeController@delete');
 
 // Programme courses routes
 Route::get('/programme/{id}/courses', 'CourseController@courses');
@@ -46,6 +47,7 @@ Route::get('/certificates/add', 'CertificateController@create');
 Route::post('/certificates/add', 'CertificateController@store');
 Route::get('/certificates/{id}/edit', 'CertificateController@edit');
 Route::post('/certificates/{id}/edit', 'CertificateController@update');
+Route::post('/certificates/{id}/delete', 'CertificateController@delete');
 
 // Course routes
 Route::get('/courses', 'CourseController@index');
@@ -53,6 +55,7 @@ Route::get('/courses/add', 'CourseController@create');
 Route::post('/courses/add', 'CourseController@store');
 Route::get('/courses/{id}/edit', 'CourseController@edit');
 Route::post('/courses/{id}/edit', 'CourseController@update');
+Route::post('/courses/{id}/delete', 'CourseController@delete');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['web', 'RedirectAdmin']], function () {
     Route::get('/home', 'AdminControllers\AdminController@index');
