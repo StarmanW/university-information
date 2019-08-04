@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('programmes', 'ProgrammeController@getProgrammes');
-Route::get('courses', 'Course@getCourses');
+Route::get('courses', 'CourseController@getCourses');
 Route::get('certificates', 'CertificateController@getCertificates');
 
 Route::get('staff/info', 'StaffControllers\StaffController@getStaffInfo');
