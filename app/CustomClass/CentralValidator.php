@@ -45,35 +45,43 @@ class CentralValidator
         ];
     }
 
-    public function validateRegisterAdmin($data)
-    {
+    public function validateRegisterAdmin($data) {
         return Validator::make($data, [
-            'name' => $this->validationRules['name'],
-            'email' => $this->validationRules['email'],
-            'password' => $this->validationRules['password'],
-            'role' => $this->validationRules['roleAdmin']
+                    'name' => $this->validationRules['name'],
+                    'email' => $this->validationRules['email'],
+                    'password' => $this->validationRules['password'],
+                    'role' => $this->validationRules['roleAdmin']
         ]);
     }
 
-    public function validateRegisterStaff($data)
-    {
+    public function validateRegisterStaff($data) {
         return Validator::make($data, [
-            'name' => $this->validationRules['name'],
-            'email' => $this->validationRules['email'],
-            'password' => $this->validationRules['password'],
-            'role' => $this->validationRules['roleAdmin'],
-            'faculty' => $this->validationRules['faculty'],
-            'specialization' => $this->validationRules['textWithSymbols'],
-            'interest' => $this->validationRules['textWithSymbols'],
-            'position' => $this->validationRules['textWithSymbols']
+                    'name' => $this->validationRules['name'],
+                    'email' => $this->validationRules['email'],
+                    'password' => $this->validationRules['password'],
+                    'role' => $this->validationRules['roleStaff'],
+                    'faculty' => $this->validationRules['faculty'],
+                    'specialization' => $this->validationRules['textWithSymbols'],
+                    'interest' => $this->validationRules['textWithSymbols'],
+                    'position' => $this->validationRules['position']
         ]);
     }
 
-    public function validateEditUser($data)
-    {
-        return Validator::make($data, [
-            'id' => $this->validationRules['numeric'],
-            'role' => $this->validationRules['roleAdminOrStaff']
+    public function validateEditAdmin($request) {
+        return Validator::make($request->all(), [
+                    'id' => $this->validationRules['numeric'],
+                    'role' => $this->validationRules['roleAdminOrStaff']
+        ]);
+    }
+
+    public function validateEditStaff($request) {
+        return Validator::make($request->all(), [
+                    'id' => $this->validationRules['numeric'],
+                    'role' => $this->validationRules['roleStaff'],
+                    'faculty' => $this->validationRules['faculty'],
+                    'specialization' => $this->validationRules['textWithSymbols'],
+                    'interest' => $this->validationRules['textWithSymbols'],
+                    'position' => $this->validationRules['textWithSymbols']
         ]);
     }
 

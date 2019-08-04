@@ -57,7 +57,9 @@ Route::get('/courses/{id}/edit', 'CourseController@edit');
 Route::post('/courses/{id}/edit', 'CourseController@update');
 Route::post('/courses/{id}/delete', 'CourseController@delete');
 
+//admin routes
 Route::group(['prefix' => 'admin', 'middleware' => ['web', 'RedirectAdmin']], function () {
     Route::get('/home', 'AdminControllers\AdminController@index');
-    Route::get('/user/{id}/edit', 'EditController@edit');
+    Route::get('/user/{id}/edit', 'AdminControllers\EditController@create');
+    Route::post('/user/{id}/edit', 'AdminControllers\EditController@edit');
 });
