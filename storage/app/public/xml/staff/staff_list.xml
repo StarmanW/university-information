@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE staffList SYSTEM 'staff.dtd'>
+<staffList>
+  <staff>
+    <name>a</name>
+    <position>Lecturer</position>
+    <faculty>FAFB</faculty>
+    <specialization>fvfdfdv</specialization>
+    <area_of_interest>dfvfdv</area_of_interest>
+  </staff>
+</staffList>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT staffList (staff)*>
+<!ELEMENT staff (name , position, faculty, specialization, area_of_interest)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT position (#PCDATA)>
+<!ELEMENT faculty (#PCDATA)>
+<!ELEMENT specialization (#PCDATA)>
+<!ELEMENT area_of_interest (#PCDATA)>
+
+ 
