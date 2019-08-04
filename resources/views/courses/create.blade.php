@@ -57,8 +57,9 @@
                 {{-- Course credit hour --}}
                 <div class="form-group">
                     <label for="course_cred_hour">Course Credit Hour:</label>
-                    <input type="number" name="course_cred_hour" value="{{ old('course_cred_hour') }}" id="course_cred_hour"
-                        class="form-control" min="1" max="4" placeholder="Enter course credit hour">
+                    <input type="number" name="course_cred_hour" value="{{ old('course_cred_hour') }}"
+                        id="course_cred_hour" class="form-control" min="1" max="4"
+                        placeholder="Enter course credit hour">
                 </div>
                 @error('course_cred_hour')
                 <p class="text-danger font-weight-bold">{{ $message }}</p>
@@ -74,8 +75,11 @@
                 <p class="text-danger font-weight-bold">{{ $message }}</p>
                 @enderror
 
-                <div class="row">
-                    <div class="col-md-12">
+                <div class="row my-2">
+                    <div class="col-md-6">
+                        <button type="reset" class="btn btn-outline-primary btn-block">Reset</button>
+                    </div>
+                    <div class="col-md-6">
                         <button type="submit" class="btn btn-outline-success btn-block">Add New Course</button>
                     </div>
                 </div>

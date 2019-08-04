@@ -4,12 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\Certificate;
-use Illuminate\Support\Facades\Validator;
 use App\Model\Programme;
 use App\Model\ProgrammeCertificate;
+use App\CustomClass\CentralValidator;
+use App\Http\Resources\Certificate as CertificateResource;
 
 class CertificateController extends Controller
 {
+    private $validator;
+
+    public function __construct()
+    {
+        $this->validator = new CentralValidator();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,10 +25,13 @@ class CertificateController extends Controller
      */
     public function index()
     {
-        $certificates = Certificate::all();
-        return view('certificates.index')->with('certificates', $certificates);
+        return view('certificates.index');
     }
 
+    public function getCertificates() {
+        return CertificateResource::collection(Certificate::all());
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -28,8 +39,7 @@ class CertificateController extends Controller
      */
     public function create()
     {
-        $programmes = Programme::all();
-        return view('certificates.create', ['programmes' => $programmes]);
+        return view('certificates.create');
     }
 
 
@@ -42,10 +52,7 @@ class CertificateController extends Controller
     public function store(Request $request)
     {
         //Validate Data
-        $validator = Validator::make($request->all(), [
-            'cert_name' => ['required', 'string', 'min:2', 'max:255', 'regex:/^[A-z\(\)\-\@\, ]{2,255}$/'],
-            'cert_desc' => ['required', 'string', 'min:2', 'regex:/^[\w\W\d\D]+$/'],
-        ]);
+        $validator = $this->validator->validateCertificate($request);
 
         // Adding of new certificate
         if ($validator->fails()) {
@@ -62,7 +69,7 @@ class CertificateController extends Controller
                 $progCertificate->cert_id = $certificate->id;
                 $progCertificate->save();
             }
-            
+
             if ($certificate->save()) {
                 return redirect()->back()->with('addStatus', true);
             } else {
@@ -94,10 +101,7 @@ class CertificateController extends Controller
     public function update(Request $request, $id)
     {
         //Validate Data
-        $validator = Validator::make($request->all(), [
-            'cert_name' => ['required', 'string', 'min:2', 'max:255', 'regex:/^[A-z\(\)\-\@\, ]{2,255}$/'],
-            'cert_desc' => ['required', 'string', 'min:2', 'regex:/^[\w\W\d\D]+$/'],
-        ]);
+        $validator = $this->validator->validateCertificate($request);
 
         // Update of certificate
         if ($validator->fails()) {
@@ -112,7 +116,7 @@ class CertificateController extends Controller
                 foreach ($certificate->programmeCertificates as $pc) {
                     $pc->delete();
                 }
-                
+
                 foreach ($request->input('prog_incor') as $prog_id) {
                     $progCertificate = new ProgrammeCertificate();
                     $progCertificate->prog_id = $prog_id;
@@ -127,5 +131,13 @@ class CertificateController extends Controller
                 return redirect()->back()->with('updateStatus', false)->withInput();
             }
         }
+    }
+
+    public function delete($id)
+    {
+        $cert = Certificate::find($id);
+        $cert->programmeCertificates()->delete();
+        $cert->delete();
+        return redirect()->back()->with('deleteStatus', true);
     }
 }

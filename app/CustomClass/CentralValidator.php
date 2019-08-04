@@ -16,11 +16,13 @@ use Illuminate\Validation\Rule;
  *
  * @author sein
  */
-class CentralValidator {
+class CentralValidator
+{
 
     private $validationRules;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->validationRules = [
             //general
             'textWithSymbols' => ['required', 'string', 'regex:/^[A-z\(\)\-\@\,\& ]{0,255}$/'],
@@ -37,47 +39,93 @@ class CentralValidator {
             'position' => ['required', 'string', Rule::in(['Dean', 'Lecturer', 'Tutor'])],
             //course
             'course_id' => ['required', 'string', 'min:2', 'max:255', 'regex:/^[A-Z\-]{4}\d{4}$/'],
-//            'course_name' => ['required', 'string', 'min:2', 'max:255', 'regex:/^[A-z\(\)\-\@\, ]{2,255}$/'],
-//            'course_desc' => ['required', 'string', 'min:2', 'max:255', 'regex:/^[\w\W\d\D]+$/'],
-//            'course_cred_hour' => ['required', 'string', 'min:1', 'max:4', 'regex:/^[1-4]$/'],
-//            'course_fee' => ['required', 'numeric'],
             //programme
             'prog_id' => ['required', 'string', 'max:3', 'regex:/^[A-Z]{3}$/', 'unique:programmes,id'],
-//            'prog_name' => ['required', 'string', 'min:2', 'max:255', 'regex:/^[A-z\(\)\-\@\, ]{2,255}$/'],
-//            'prog_desc' => ['required', 'string', 'min:2', 'regex:/^[\w\W\d\D]+$/'],
-//            'prog_mer' => ['required', 'string', 'min:2', 'regex:/^[\w\W\d\D]+$/'],
-//            'prog_duration' => 'required|integer|min:1|max:4',
             'prog_level' => 'required', 'string', 'regex:/^(Diploma|Bachelor Degree|Master|Doctorate \(PhD\))$/'
         ];
     }
 
-    public function validateRegisterAdmin($data) {
+    public function validateRegisterAdmin($data)
+    {
         return Validator::make($data, [
-                    'name' => $this->validationRules['name'],
-                    'email' => $this->validationRules['email'],
-                    'password' => $this->validationRules['password'],
-                    'role' => $this->validationRules['roleAdmin']
+            'name' => $this->validationRules['name'],
+            'email' => $this->validationRules['email'],
+            'password' => $this->validationRules['password'],
+            'role' => $this->validationRules['roleAdmin']
         ]);
     }
 
-    public function validateRegisterStaff($data) {
+    public function validateRegisterStaff($data)
+    {
         return Validator::make($data, [
-                    'name' => $this->validationRules['name'],
-                    'email' => $this->validationRules['email'],
-                    'password' => $this->validationRules['password'],
-                    'role' => $this->validationRules['roleAdmin'],
-                    'faculty' => $this->validationRules['faculty'],
-                    'specialization' => $this->validationRules['textWithSymbols'],
-                    'interest' => $this->validationRules['textWithSymbols'],
-                    'position' => $this->validationRules['textWithSymbols']
+            'name' => $this->validationRules['name'],
+            'email' => $this->validationRules['email'],
+            'password' => $this->validationRules['password'],
+            'role' => $this->validationRules['roleAdmin'],
+            'faculty' => $this->validationRules['faculty'],
+            'specialization' => $this->validationRules['textWithSymbols'],
+            'interest' => $this->validationRules['textWithSymbols'],
+            'position' => $this->validationRules['textWithSymbols']
         ]);
     }
-    
-    public function validateEditUser($data) {
+
+    public function validateEditUser($data)
+    {
         return Validator::make($data, [
             'id' => $this->validationRules['numeric'],
             'role' => $this->validationRules['roleAdminOrStaff']
         ]);
     }
 
+    public function validateRegisterProgramme($request)
+    {
+        return Validator::make($request->all(), [
+            'prog_id' => $this->validationRules['prog_id'],
+            'prog_name' => $this->validationRules['textWithSymbols'],
+            'prog_desc' => $this->validationRules['textWithSymbols'],
+            'prog_mer' => $this->validationRules['textWithSymbols'],
+            'prog_duration' => $this->validationRules['numericDigitFour'],
+            'prog_level' => $this->validationRules['prog_level']
+        ]);
+    }
+
+    public function validateEditProgramme($request)
+    {
+        return Validator::make($request->all(), [
+            'prog_name' => $this->validationRules['textWithSymbols'],
+            'prog_desc' => $this->validationRules['textWithSymbols'],
+            'prog_mer' => $this->validationRules['textWithSymbols'],
+            'prog_duration' => $this->validationRules['numericDigitFour'],
+            'prog_level' => $this->validationRules['prog_level']
+        ]);
+    }
+
+    public function valdiateRegisterCourse($request)
+    {
+        return Validator::make($request->all(), [
+            'course_id' => $this->validationRules['course_id'],
+            'course_name' => $this->validationRules['textWithSymbols'],
+            'course_desc' => $this->validationRules['textWithSymbols'],
+            'course_cred_hour' => $this->validationRules['numericDigitFour'],
+            'course_fee' => $this->validationRules['numeric'],
+        ]);
+    }
+
+    public function valdiateEditCourse($request)
+    {
+        return Validator::make($request->all(), [
+            'course_name' => $this->validationRules['textWithSymbols'],
+            'course_desc' => $this->validationRules['textWithSymbols'],
+            'course_cred_hour' => $this->validationRules['numericDigitFour'],
+            'course_fee' => $this->validationRules['numeric'],
+        ]);
+    }
+
+    public function validateCertificate($request)
+    {
+        return Validator::make($request->all(), [
+            'cert_name' => $this->validationRules['textWithSymbols'],
+            'cert_desc' => $this->validationRules['textWithSymbols'],
+        ]);
+    }
 }

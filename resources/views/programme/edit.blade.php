@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-6 mx-auto">
+        <div class="col-md-7 mx-auto">
             @if (session('updateStatus') === true)
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -92,7 +92,8 @@
                     <label for="">Campuses Offered:</label><br />
                     @foreach ($campuses as $campus)
                     <input type="checkbox" class="form-check-input" name="branch_offered[]" id="branch_{{$campus->id}}"
-                        value="{{$campus->id}}" @if (count($programme->campusProgrammes->where('campus_id', '=', $campus->id)) === 1) {{"checked"}} @endif>
+                        value="{{$campus->id}}" @if (count($programme->campusProgrammes->where('campus_id', '=',
+                    $campus->id)) === 1) {{"checked"}} @endif>
                     <label class="form-check-label" for="branch_{{$campus->id}}">
                         {{$campus->campus_name}}
                     </label>
@@ -105,14 +106,20 @@
 
                 <div class="row my-3">
                     <div class="col-md-6">
-                        <a type="button" href="/programme/{{$programme->id}}/courses" class="btn btn-outline-primary btn-block">Manage Course</a>
+                        <a type="button" href="/programme/{{$programme->id}}/courses"
+                            class="btn btn-outline-primary btn-block">Manage Course</a>
                     </div>
                     <div class="col-md-6">
-                        <a type="button" href="/programme/{{$programme->id}}/elective_courses" class="btn btn-outline-primary btn-block">Manage Elective Course</a>
+                        <a type="button" href="/programme/{{$programme->id}}/elective_courses"
+                            class="btn btn-outline-primary btn-block">Manage Elective Course</a>
                     </div>
+
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
+                        <a type="button" href="/programme/" class="btn btn-outline-primary btn-block"> Back</a>
+                    </div>
+                    <div class="col-md-6">
                         <button type="submit" class="btn btn-outline-success btn-block">Update Programme</button>
                     </div>
                 </div>

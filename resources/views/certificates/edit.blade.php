@@ -54,15 +54,15 @@
                     <label class="form-check-label" for="prog_incorp_{{$prog->id}}">
                         {{$prog->prog_name}}
                     </label>
-                    @error('prog_incor[]')
-                    <p class="text-danger font-weight-bold">{{ $message }}</p>
-                    @enderror
                     <br />
                     @endforeach
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12">
+                <div class="row mt-2">
+                    <div class="col-md-6">
+                        <a href="/certificates" type="button" class="btn btn-outline-primary btn-block">Back</a>
+                    </div>
+                    <div class="col-md-6">
                         <button type="submit" class="btn btn-outline-success btn-block">Update Certificate</button>
                     </div>
                 </div>
@@ -71,11 +71,5 @@
     </div>
 </div>
 
-<script>
-    (function() {
-        setTimeout(() => {
-            document.querySelector('.alert').remove();
-        }, 5000);
-    })();
-</script>
+<script src="/js/certificates.js"></script>
 @endsection
