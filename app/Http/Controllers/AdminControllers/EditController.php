@@ -56,13 +56,13 @@ class EditController extends Controller {
     //add validation
     protected function edit(Request $request, $id) {
         $user = User::find($id);
-        $userAdmin;
-        $userStaff;
+        $userAdmin = false;
+        $userStaff = false;
         $validator;
-        $userAdminDeleted;
-        $userStaffDeleted;
-        $userAdminSaved;
-        $userStaffSaved;
+        $userAdminDeleted = false;
+        $userStaffDeleted = false;
+        $userAdminSaved = false;
+        $userStaffSaved = false;
 
         if ($request->input('role') === 'Admin') {
             $validator = $this->validator->validateEditAdmin($request);
