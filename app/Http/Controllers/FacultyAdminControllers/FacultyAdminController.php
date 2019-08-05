@@ -58,8 +58,12 @@ class FacultyAdminController extends Controller {
     }
 
     public function showEditForm($id) {
-        $staff = User::find($id);
-        return view('facultyAdmin.edit', ['staff' => $staff]);
+        if (Auth::user()->id == $id) {
+            return redirect('/faculty_admin')->with('selectError', 'Please select an appropriate user.');
+        } else {
+            $staff = User::find($id);
+            return view('facultyAdmin.edit', ['staff' => $staff]);
+        }
     }
 
     public function update(Request $request, $id) {

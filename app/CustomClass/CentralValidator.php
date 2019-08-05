@@ -23,7 +23,7 @@ class CentralValidator {
     public function __construct() {
         $this->validationRules = [
             //general
-            'textWithSymbols' => ['required', 'string', 'regex:/^\w\W\d\D][^\<\>]+$/'],
+            'textWithSymbols' => ['required', 'string', 'regex:/^[\w\W\d\D][^\<\>]+$/'],
             'name' => ['required', 'string', 'regex:/^[A-z\(\)\-\@\ ]{1,255}$/'],
             'numeric' => ['required', 'numeric'],
             'numericDigitFour' => ['required', 'integer', 'min:1', 'max:4', 'regex:/^[1-4]$/'],
@@ -95,7 +95,7 @@ class CentralValidator {
                     'role' => $this->validationRules['roleStaff'],
                     'specialization' => $this->validationRules['textWithSymbols'],
                     'interest' => $this->validationRules['textWithSymbols'],
-                    'position' => $this->validationRules['textWithSymbols']
+                    'position' => $this->validationRules['position']
         ]);
     }
 

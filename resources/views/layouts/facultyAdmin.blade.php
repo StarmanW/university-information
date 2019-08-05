@@ -50,10 +50,10 @@
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
                             <div>
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <a class="nav-link" href="/faculty_admin/register">{{ __('Register') }}</a>
                             </div>
                             <div>
-                                <a class="nav-link" href="{{ route('staff-list') }}">{{ __('Staff List') }}</a>
+                                <a class="nav-link" href="/staff/list">{{ __('Staff List') }}</a>
                             </div>
                         </ul>
 

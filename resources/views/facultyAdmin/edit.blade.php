@@ -4,6 +4,16 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+
+            @if (session('roleError') !== null)
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>{{ session('roleError') }}</strong>
+            </div>
+            @endif
+
             @if (session('updateStatus') === true)
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -35,8 +45,8 @@
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                       name="name" value="{{ $staff->facultyAdmins->name }}" readonly="readonly" autocomplete="name"
-                                    autofocus>
+                                    name="name" value="{{ $staff->facultyAdmins->name }}" readonly="readonly"
+                                    autocomplete="name" autofocus>
 
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
@@ -45,7 +55,7 @@
                                 @enderror
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
 
@@ -67,8 +77,8 @@
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                    name="name" value="{{ $staff->facultyStaffs->name }}" readonly="readonly" autocomplete="name"
-                                    autofocus>
+                                    name="name" value="{{ $staff->facultyStaffs->name }}" readonly="readonly"
+                                    autocomplete="name" autofocus>
 
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
