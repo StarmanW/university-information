@@ -38,7 +38,7 @@
         <div class="col-md-6">
             <h1 class="text-center">Elective Course List for {{$prog_id}}</h1>
             @if (count($progCourses) !== 0)
-            <form method="POST" action="/programme/{{$prog_id}}/remove_prog_elective_courses">
+            <form method="POST" action="/faculty_staff/programme/{{$prog_id}}/remove_prog_elective_courses">
                 {{ csrf_field() }}
                 @foreach ($progCourses as $course)
                 <div class="form-check">
@@ -60,7 +60,7 @@
         <div class="col-md-6">
             <h1 class="text-center">FOCS Course List</h1>
             @if (count($facultyCourses) !== 0)
-            <form method="POST" action="/programme/{{$prog_id}}/add_prog_elective_courses"
+            <form method="POST" action="/faculty_staff/programme/{{$prog_id}}/add_prog_elective_courses"
                 enctype="multipart/form-data">
                 {{ csrf_field() }}
                 @foreach ($facultyCourses as $course)
@@ -84,7 +84,7 @@
     </div>
     <div class="row">
         <div class="col-md-12 my-2">
-            <a class="btn btn-outline-primary btn-block" href="/programme/{{$prog_id}}/edit" role="button">Back</a>
+            <a class="btn btn-outline-primary btn-block" href="/faculty_staff/programme/{{$prog_id}}/edit" role="button">Back</a>
         </div>
     </div>
 </div>

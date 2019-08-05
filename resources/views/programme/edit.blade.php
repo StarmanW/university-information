@@ -22,7 +22,7 @@
 
             <h1 class="text-center">Update Programme {{$programme->id}}</h1>
             <hr>
-            <form method="POST" action="/programme/{{ $programme->id }}/edit" enctype="multipart/form-data">
+            <form method="POST" action="/faculty_staff/programme/{{ $programme->id }}/edit" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 {{-- Programme ID --}}
                 <input type="text" hidden="true" value="{{ $programme->id }}" name="prog_id" maxlength="3"

@@ -54,7 +54,7 @@
             </ol>
             <div class="row">
                 <div class="col-md-12 my-2">
-                    <a class="btn btn-outline-primary btn-block" href="/programme" role="button">Back</a>
+                    <a class="btn btn-outline-primary btn-block" href="/faculty_staff/programme" role="button">Back</a>
                 </div>
             </div>
         </div>

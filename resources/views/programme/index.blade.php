@@ -46,17 +46,17 @@
                         <td>{{count($prog->programmeCourses->where('is_elective', '=', 1))}}</td>
                         <td>{{count($prog->programmeCertificates)}}</td>
                         <td>
-                            <a type="button" href="/programme/{{$prog->id}}/view" name="view_btn" id="view_btn"
+                            <a type="button" href="/faculty_staff/programme/{{$prog->id}}/view" name="view_btn" id="view_btn"
                                 class="btn btn-outline-success btn-md btn-block">View</a>
                         </td>
                         <td>
-                            <a type="button" href="/programme/{{$prog->id}}/edit" name="edit_btn" id="edit_btn"
+                            <a type="button" href="/faculty_staff/programme/{{$prog->id}}/edit" name="edit_btn" id="edit_btn"
                                 class="btn btn-outline-primary btn-md btn-block">Edit</a>
                         </td>
                         <td>
                             <a href="#" class="btn btn-outline-danger btn-block"
                                 onclick="deleteProgramme('{{$prog->id}}')">Delete</a>
-                            <form method="post" action="/programme/{{$prog->id}}/delete" id="delete{{$prog->id}}"
+                            <form method="post" action="/faculty_staff/programme/{{$prog->id}}/delete" id="delete{{$prog->id}}"
                                 style="display: none;">
                                 {{csrf_field()}}
                             </form>

@@ -22,7 +22,7 @@
 
             <h1 class="text-center">Add New Programme</h1>
             <hr>
-            <form method="POST" action="/programme/add" enctype="multipart/form-data">
+            <form method="POST" action="/faculty_staff/programme/add" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 {{-- Programme ID --}}
                 <div class="form-group">
