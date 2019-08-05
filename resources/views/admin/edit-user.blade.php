@@ -7,7 +7,7 @@ Author: Chong Jia Herng
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            
+
             @if (session('roleError') !== null)
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -16,7 +16,7 @@ Author: Chong Jia Herng
                 <strong>{{ session('roleError') }}</strong>
             </div>
             @endif
-            
+
             <div class="card">
                 <div class="card-header"></div>
 
@@ -43,9 +43,11 @@ Author: Chong Jia Herng
 
                             <div class="col-md-6">
                                 @if ($user->role === 'Admin')
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{!! \App\Model\Admin::find($user->id)->name !!}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{!! \App\Model\Admin::find($user->id)->name !!}" required autocomplete="name" autofocus>
+                                @elseif ($user->role === 'Staff')
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{!! \App\Model\FacultyStaff::find($user->id)->name !!}" required autocomplete="name" autofocus>
                                 @else
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{!! \App\Model\FacultyStaff::find($user->id)->name !!}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{!! \App\Model\FacultyAdmin::find($user->id)->name !!}" required autocomplete="name" autofocus>
                                 @endif
 
                                 @error('name')
@@ -61,8 +63,9 @@ Author: Chong Jia Herng
 
                             <div class="col-md-6">
                                 <select onchange="showDiv(this)" name="role" class="form-control @error('role') is-invalid @enderror">
-                                    <option value="Admin" selected="selected"@if($user->role === 'Admin'){{ 'selected="selected"' }}@endif>Admin</option>
-                                    <option value="Staff" @if($user->role === 'Staff'){{ 'selected="selected"' }}@endif>Staff</option>
+                                    <option value="Admin" selected="selected"@if(old('role') === 'Admin'){{ 'selected="selected"' }}@endif>Admin</option>
+                                    <option value="Faculty Admin" @if(old('role') === 'Faculty Admin'){{ 'selected="selected"' }}@endif>Faculty Admin</option>
+                                    <option value="Staff" @if(old('role') === 'Staff'){{ 'selected="selected"' }}@endif>Staff</option>
                                 </select>
 
                                 @error('role')
@@ -74,13 +77,13 @@ Author: Chong Jia Herng
                         </div>
 
                         @php( $faculties = \App\Model\Faculty::all() )
-                        <div class="form-group row staff" style="display: none">
+                        <div class="form-group row faculty-admin-and-staff" style="display: none">
                             <label for="faculty" class="col-md-4 col-form-label text-md-right">{{ __('Faculty') }}</label>
 
                             <div class="col-md-6">
                                 <select name="faculty" class="form-control @error('faculty') is-invalid @enderror">
                                     @foreach ($faculties as $faculty)
-                                    <option  value="{{ $faculty->id }}" @if(old('faculty') === '{{ $faculty->faculty_name }}'){{ 'selected="selected"' }}@endif>{{ $faculty->faculty_name }}</option>
+                                    <option  value="{{ $faculty->id }}" @if(old('faculty') === '{{ $faculty->id }}'){{ 'selected="selected"' }}@endif>{{ $faculty->id }}{{ " - " }}{{ $faculty->faculty_name }}</option>
                                     @endforeach
                                 </select>
 
@@ -91,9 +94,10 @@ Author: Chong Jia Herng
                                 @enderror
                             </div>
                         </div>
-
+                        
+                        
                         <div class="form-group row staff" style="display: none">
-                            <label for="specialization" class="col-md-4 col-form-label text-md-right">{{ __('Specialization') }} </label>
+                            <label for="specialization" class="col-md-4 col-form-label text-md-right">{{ __('Specialization') }} required</label>
 
                             <div class="col-md-6">
                                 <textarea id="specialization" rows="4" cols="20" class="form-control @error('specialization') is-invalid @enderror" name="specialization" autocomplete="specialization">{{ old('specialization') }}</textarea>
@@ -107,7 +111,7 @@ Author: Chong Jia Herng
                         </div>
 
                         <div class="form-group row staff" style="display: none">
-                            <label for="interest" class="col-md-4 col-form-label text-md-right">{{ __('Area(s) of Interest') }}</label>
+                            <label for="interest" class="col-md-4 col-form-label text-md-right">{{ __('Area(s) of Interest') }} required</label>
 
                             <div class="col-md-6">
                                 <textarea id="interest" rows="4" cols="20" class="form-control @error('interest') is-invalid @enderror" name="interest" autocomplete="interest">{{ old('interest') }}</textarea>
@@ -156,7 +160,19 @@ Author: Chong Jia Herng
     function showDiv(element)
     {
         Array.from(document.querySelectorAll('.staff')).forEach((item) => {
-            item.style.display = element.value == 'Staff' ? '' : 'none';
+          item.style.display = element.value == 'Staff' ? '' : 'none'; 
+        })
+        
+        Array.from(document.querySelectorAll('.faculty-admin')).forEach((item) => {
+          item.style.display = element.value == 'Faculty Admin' ? '' : 'none'; 
+        })
+        
+        Array.from(document.querySelectorAll('.faculty-admin-and-staff')).forEach((item) => {
+            if (element.value == 'Faculty Admin' || element.value == 'Staff') {
+                item.style.display = '';
+            } else {
+                item.style.display = 'none';
+            }
         })
     }
 </script>

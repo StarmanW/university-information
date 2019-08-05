@@ -71,6 +71,7 @@ Author: Chong Jia Herng
                             <div class="col-md-6">
                                 <select onchange="showDiv(this)" name="role" class="form-control @error('role') is-invalid @enderror">
                                     <option value="Admin" selected="selected"@if(old('role') === 'Admin'){{ 'selected="selected"' }}@endif>Admin</option>
+                                    <option value="Faculty Admin" @if(old('role') === 'Faculty Admin'){{ 'selected="selected"' }}@endif>Faculty Admin</option>
                                     <option value="Staff" @if(old('role') === 'Staff'){{ 'selected="selected"' }}@endif>Staff</option>
                                 </select>
 
@@ -83,13 +84,13 @@ Author: Chong Jia Herng
                         </div>
 
                         @php( $faculties = \App\Model\Faculty::all() )
-                        <div class="form-group row staff" style="display: none">
+                        <div class="form-group row faculty-admin-and-staff" style="display: none">
                             <label for="faculty" class="col-md-4 col-form-label text-md-right">{{ __('Faculty') }}</label>
 
                             <div class="col-md-6">
                                 <select name="faculty" class="form-control @error('faculty') is-invalid @enderror">
                                     @foreach ($faculties as $faculty)
-                                    <option  value="{{ $faculty->id }}" @if(old('faculty') === '{{ $faculty->faculty_name }}'){{ 'selected="selected"' }}@endif>{{ $faculty->faculty_name }}</option>
+                                    <option  value="{{ $faculty->id }}" @if(old('faculty') === '{{ $faculty->id }}'){{ 'selected="selected"' }}@endif>{{ $faculty->id }}{{ " - " }}{{ $faculty->faculty_name }}</option>
                                     @endforeach
                                 </select>
 
@@ -100,7 +101,8 @@ Author: Chong Jia Herng
                                 @enderror
                             </div>
                         </div>
-
+                        
+                        
                         <div class="form-group row staff" style="display: none">
                             <label for="specialization" class="col-md-4 col-form-label text-md-right">{{ __('Specialization') }} required</label>
 
@@ -166,6 +168,18 @@ Author: Chong Jia Herng
     {
         Array.from(document.querySelectorAll('.staff')).forEach((item) => {
           item.style.display = element.value == 'Staff' ? '' : 'none'; 
+        })
+        
+        Array.from(document.querySelectorAll('.faculty-admin')).forEach((item) => {
+          item.style.display = element.value == 'Faculty Admin' ? '' : 'none'; 
+        })
+        
+        Array.from(document.querySelectorAll('.faculty-admin-and-staff')).forEach((item) => {
+            if (element.value == 'Faculty Admin' || element.value == 'Staff') {
+                item.style.display = '';
+            } else {
+                item.style.display = 'none';
+            }
         })
     }
 </script>

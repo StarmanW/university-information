@@ -37,8 +37,10 @@ Author: Chong Jia Herng
                                 <td>{{ $user->id }}</td>
                                 @if ($user->role === 'Admin')
                                     <td>{!! \App\Model\Admin::find($user->id)->name !!}</td>
-                                @else
+                                @elseif ($user->role === 'Staff')
                                     <td>{!! \App\Model\FacultyStaff::find($user->id)->name !!}</td>
+                                @else
+                                    <td>{!! \App\Model\FacultyAdmin::find($user->id)->name !!}</td>
                                 @endif
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->role }}</td>

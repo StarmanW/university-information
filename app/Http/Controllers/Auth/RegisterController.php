@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Model\Admin;
 use App\Model\FacultyStaff;
+use App\Model\FacultyAdmin;
 use App\Model\Faculty;
 use App\Http\Controllers\Controller;
 use App\CustomClass\CentralValidator;
@@ -37,7 +38,7 @@ use RegistersUsers;
      * 
      * @var string
      */
-    protected $redirectTo = '/login';
+    protected $redirectTo = '/register';
     private $centralValidator;
 
     /**
@@ -59,14 +60,17 @@ use RegistersUsers;
     protected function validator(array $data) {
         if ($data['role'] === 'Admin') {
             $validator = $this->centralValidator->validateRegisterAdmin($data);
+        } else if ($data['role'] === 'Faculty Admin') {
+            $validator = $this->centralValidator->validateRegisterFacultyAdmin($data);
         } else if ($data['role'] === 'Staff') {
             $validator = $this->centralValidator->validateRegisterStaff($data);
         }
+        
         return $validator;
     }
 
     public function register(Request $request) {
-        if ($request->input('role') === 'Admin' || $request->input('role') === 'Staff') {
+        if ($request->input('role') === 'Admin' || $request->input('role') === 'Faculty Admin' || $request->input('role') === 'Staff') {
             $validator = $this->validator($request->all());
             $validator->validate();
 
@@ -76,7 +80,7 @@ use RegistersUsers;
 
             event(new Registered($user = $this->create($request->all())));
 
-            $this->guard()->login($user);
+//            $this->guard()->login($user);
 
             return $this->registered($request, $user) ?: redirect($this->redirectPath());
         } else {
@@ -94,6 +98,7 @@ use RegistersUsers;
         $user;
         $userAdmin;
         $userStaff;
+        $userFacultyAdmin;
 
         $user = new User();
         $user->role = $data['role'];
@@ -107,6 +112,13 @@ use RegistersUsers;
             $userAdmin->user_id = $user->id;
             $userAdmin->name = $data['name'];
             $userAdminSaved = $userAdmin->save();
+        } elseif ($data['role'] === 'Faculty Admin') {
+            $userFacultyAdmin = new FacultyAdmin();
+            $userFacultyAdmin->id = $user->id;
+            $userFacultyAdmin->user_id = $user->id;
+            $userFacultyAdmin->name = $data['name'];
+            $userFacultyAdmin->faculty_id = $data['faculty'];
+            $userFacultyAdminSaved = $userFacultyAdmin->save();
         } elseif ($data['role'] === 'Staff') {
             $userStaff = new FacultyStaff();
             $userStaff->id = $user->id;
