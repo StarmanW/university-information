@@ -19,7 +19,12 @@ class RedirectIfAuthenticated {
         if (Auth::guard($guard)->check()) {
             if (Auth::check() && Auth::user()->role === 'Admin') {
                 return redirect('/admin/home');
-            }
+            } elseif (Auth::check() && Auth::user()->role === 'FacultyAdmin') {
+                return redirect('/faculty_admin');
+            } elseif (Auth::check() && Auth::user()->role === 'Staff') {
+                return redirect('/faculty_staff/programme');
+            } 
+            
             return redirect('/home');
         }
 
