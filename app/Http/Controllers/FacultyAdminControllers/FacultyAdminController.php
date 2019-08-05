@@ -43,7 +43,7 @@ class FacultyAdminController extends Controller {
             $facultyStaff->id = $user->id;
             $facultyStaff->user_id = $user->id;
             $facultyStaff->name = $request->input('name');
-            $facultyStaff->faculty_id = 'FOCS'; //Auth::user()->facultyAdmins->faculty_id
+            $facultyStaff->faculty_id = Auth::user()->facultyAdmins->faculty_id;
             $facultyStaff->specialization = $request->input('specialization');
             $facultyStaff->area_of_interest = $request->input('interest');
             $facultyStaff->position = $request->input('position');
