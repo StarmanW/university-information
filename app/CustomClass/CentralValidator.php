@@ -33,7 +33,7 @@ class CentralValidator {
             'roleAdmin' => ['required', 'string', Rule::in(['Admin'])],
             'roleStaff' => ['required', 'string', Rule::in(['Staff'])],
             'roleFacultyAdmin' => ['required', 'string', Rule::in(['Faculty Admin'])],
-            'roleAll' => ['required', 'string', Rule::in(['Admin', 'Staff', 'FacultyAdmin'])],
+            'roleAll' => ['required', 'string', Rule::in(['Admin', 'Staff', 'Faculty Admin'])],
             'faculty' => ['required', 'string', 'exists:faculties,id', 'regex:/^[A-z]{4}$/'],
             'position' => ['required', 'string', Rule::in(['Dean', 'Lecturer', 'Tutor'])],
             //course
@@ -81,17 +81,18 @@ class CentralValidator {
         ]);
     }
 
-    public function validateEditFacultyAdmin($request) {
-        return Validator::make($request->all(), [
-                    'name' => $this->validationRules['name'],
-                    'email' => $this->validationRules['email']
-        ]);
-    }
+//    public function validateEditFacultyAdmin($request) {
+//        return Validator::make($request->all(), [
+//                    'name' => $this->validationRules['name'],
+//                    'email' => $this->validationRules['email']
+//        ]);
+//    }
 
     public function validateEditFacultyStaff($request) {
         return Validator::make($request->all(), [
-                    'name' => $this->validationRules['name'],
-                    'email' => $this->validationRules['email'],
+                    'id' => $this->validationRules['numeric'],
+                    'faculty' => $this->validationRules['faculty'],
+                    'role' => $this->validationRules['roleStaff'],
                     'specialization' => $this->validationRules['textWithSymbols'],
                     'interest' => $this->validationRules['textWithSymbols'],
                     'position' => $this->validationRules['textWithSymbols']
