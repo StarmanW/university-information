@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.facultyStaff')
 
 @section('content')
 <div class="container">
@@ -61,5 +61,5 @@
     </div>
 </div>
 
-<script src="js/sorttable.js"></script>
+<script src="/js/sorttable.js"></script>
 @endsection
