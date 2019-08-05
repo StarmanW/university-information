@@ -1,3 +1,7 @@
+<!--
+Author: Chong Jia Herng
+--->
+
 @extends('layouts.app')
 
 @section('content')

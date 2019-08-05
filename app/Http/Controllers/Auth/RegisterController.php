@@ -33,6 +33,8 @@ use RegistersUsers;
     /**
      * Where to redirect users after registration.
      *
+     * Author: Chong Jia Herng
+     * 
      * @var string
      */
     protected $redirectTo = '/login';

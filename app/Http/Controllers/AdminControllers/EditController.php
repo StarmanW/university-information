@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\AdminControllers;
 
+use Auth;
 use App\User;
 use App\Model\Admin;
 use App\Model\FacultyStaff;
@@ -16,6 +17,8 @@ class EditController extends Controller {
     /**
      * Where to redirect users after registration.
      *
+     * Author: Chong Jia Herng
+     * 
      * @var string
      */
     protected $redirectTo = '/admin/home';
@@ -48,9 +51,13 @@ class EditController extends Controller {
      * @return \App\User
      */
     protected function create($id) {
-        $user = User::find($id);
+        if (Auth::user()->id == $id) {
+            return redirect('/admin/home')->with('selectError', 'Please select an appropriate user.');
+        } else {
+            $user = User::find($id);
 
-        return view('admin.edit-user')->with('user', $user);
+            return view('admin.edit-user')->with('user', $user);
+        }
     }
 
     //add validation
