@@ -76,4 +76,4 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'RedirectAdmin']], fu
 });
 
 //staff xml route
-Route::get('/staff/list', 'StaffControllers\StaffController@index');
+Route::get('/staff/list', 'StaffControllers\StaffController@index')->name('staff-list');
