@@ -34,7 +34,11 @@ class StaffController extends Controller {
 
         $staffList = $proc->transformToXML($xml);
 
-        return view('staff-list')->with('staffList', $staffList);
+        if ($this->validateXML()) {
+            return view('staff-list', ['staffList' => $staffList, 'XMLStatus' => true]);
+        } else {
+            return view('staff-list', ['staffList' => $staffList, 'XMLStatus' => false]);
+        }
     }
 
     public function arrayToXML($array, $xml = false) {
@@ -58,7 +62,7 @@ class StaffController extends Controller {
 
         $implementation = new \DOMImplementation();
         $dom->appendChild($implementation->createDocumentType('staffList SYSTEM \'staff.dtd\''));
-        
+
         //add root
         $staffList = $dom->appendChild($dom->createElement('staffList'));
 
@@ -88,8 +92,19 @@ class StaffController extends Controller {
 
         $dom->formatOutput = true; // set the formatOutput attribute of domDocument to true
         // save XML as string or file 
-        $staffListXML = $dom->saveXML(); // put string in test1
+        $staffListXML = $dom->saveXML(); // put string in XML file
+
         $dom->save('../storage/app/public/xml/staff/staff_list.xml'); // save as file
+    }
+
+    public function validateXML() {
+        $dom = new DOMDocument;
+        $dom->Load('../storage/app/public/xml/staff/staff_list.xml');
+        if ($dom->validate()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function getStaffInfo() {
