@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends(((Auth::user()->role === 'Admin') ? 'layouts.admin' : 'layouts.facultyStaff'))
 
 @section('content')
 <div class="container">
