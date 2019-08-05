@@ -25,7 +25,7 @@ Route::middleware(['web', 'guest'])->group(function () {
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 });
 
-Route::middleware(['web'])->group(function () {
+Route::middleware(['web', 'RedirectAdmin'])->group(function () {
     Route::post('register', 'Auth\RegisterController@register');
     Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 });
