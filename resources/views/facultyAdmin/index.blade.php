@@ -21,7 +21,7 @@
                             @foreach ($facultyStaffs as $staff)
                             <tr>
                                 <td>{{ $staff->id }}</td>
-                                @if ($staff->role === 'Faculty Admin')
+                                @if ($staff->role === 'FacultyAdmin')
                                     <td>{{$staff->facultyAdmins->name}}</td>
                                 @elseif ($staff->role === 'Staff')
                                     <td>{{$staff->facultyStaffs->name}}</td>

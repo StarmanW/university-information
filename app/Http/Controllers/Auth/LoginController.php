@@ -32,7 +32,9 @@ use AuthenticatesUsers;
         if ($user->role === 'Admin') {
             return redirect('/admin/home');
         } else if ($user->role === 'Staff') {
-            return redirect('/home');
+            return redirect('/faculty_staff/programme');
+        } else if ($user->role === 'FacultyAdmin') {
+            return redirect('/faculty_admin');
         } else {
             return redirect('/login');
         }
