@@ -5,6 +5,7 @@ namespace App\Http\Controllers\AdminControllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
+use Auth;
 
 class AdminController extends Controller
 {
@@ -14,7 +15,7 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $users = User::all();
+        $users = User::where('id', '!=', Auth::user()->id)->get();
         return view('admin.home')->with('users', $users);
     }
 }
