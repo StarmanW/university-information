@@ -32,7 +32,7 @@
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                    name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                       name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
@@ -44,11 +44,11 @@
 
                         <div class="form-group row">
                             <label for="email"
-                                class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                   class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                    name="email" value="{{ old('email') }}" required autocomplete="email">
+                                       name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -60,12 +60,12 @@
 
                         <div class="form-group row">
                             <label for="password"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                   class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password"
-                                    class="form-control @error('password') is-invalid @enderror" name="password"
-                                    required autocomplete="new-password">
+                                       class="form-control @error('password') is-invalid @enderror" name="password"
+                                       required autocomplete="new-password">
 
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
@@ -77,24 +77,24 @@
 
                         <div class="form-group row">
                             <label for="password-confirm"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                                   class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control"
-                                    name="password_confirmation" required autocomplete="new-password">
+                                       name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
 
                         <div class="form-group row staff">
                             <label for="specialization"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Specialization') }}
-                                required</label>
+                                   class="col-md-4 col-form-label text-md-right">{{ __('Specialization') }}
+                            </label>
 
                             <div class="col-md-6">
                                 <textarea id="specialization" rows="4" cols="20"
-                                    class="form-control @error('specialization') is-invalid @enderror"
-                                    name="specialization"
-                                    autocomplete="specialization">{{ old('specialization') }}</textarea>
+                                          class="form-control @error('specialization') is-invalid @enderror"
+                                          name="specialization"
+                                          autocomplete="specialization">{{ old('specialization') }}</textarea>
 
                                 @error('specialization')
                                 <span class="invalid-feedback" role="alert">
@@ -106,13 +106,13 @@
 
                         <div class="form-group row staff">
                             <label for="interest"
-                                class="col-md-4 col-form-label text-md-right">{{ __('Area(s) of Interest') }}
-                                required</label>
+                                   class="col-md-4 col-form-label text-md-right">{{ __('Area(s) of Interest') }}
+                            </label>
 
                             <div class="col-md-6">
                                 <textarea id="interest" rows="4" cols="20"
-                                    class="form-control @error('interest') is-invalid @enderror" name="interest"
-                                    autocomplete="interest">{{ old('interest') }}</textarea>
+                                          class="form-control @error('interest') is-invalid @enderror" name="interest"
+                                          autocomplete="interest">{{ old('interest') }}</textarea>
 
                                 @error('interest')
                                 <span class="invalid-feedback" role="alert">
@@ -124,16 +124,16 @@
 
                         <div class="form-group row staff">
                             <label for="position"
-                                class=" col-md-4 col-form-label text-md-right">{{ __('Position') }}</label>
+                                   class=" col-md-4 col-form-label text-md-right">{{ __('Position') }}</label>
 
                             <div class="col-md-6">
                                 <select name="position" class="form-control @error('position') is-invalid @enderror">
                                     <option value="Lecturer" @if(old('position')==='Lecturer'
-                                        ){{ 'selected="selected"' }}@endif>Lecturer</option>
+                                            ){{ 'selected="selected"' }}@endif>Lecturer</option>
                                     <option value="Tutor" @if(old('position')==='Tutor'
-                                        ){{ 'selected="selected"' }}@endif>Tutor</option>
+                                            ){{ 'selected="selected"' }}@endif>Tutor</option>
                                     <option value="Dean" @if(old('position')==='Dean'
-                                        ){{ 'selected="selected"' }}@endif>Dean</option>
+                                            ){{ 'selected="selected"' }}@endif>Dean</option>
                                 </select>
 
                                 @error('position')
