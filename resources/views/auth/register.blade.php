@@ -101,10 +101,10 @@ Author: Chong Jia Herng
                                 @enderror
                             </div>
                         </div>
-                        
-                        
+
+
                         <div class="form-group row staff" style="display: none">
-                            <label for="specialization" class="col-md-4 col-form-label text-md-right">{{ __('Specialization') }} required</label>
+                            <label for="specialization" class="col-md-4 col-form-label text-md-right">{{ __('Specialization') }}</label>
 
                             <div class="col-md-6">
                                 <textarea id="specialization" rows="4" cols="20" class="form-control @error('specialization') is-invalid @enderror" name="specialization" autocomplete="specialization">{{ old('specialization') }}</textarea>
@@ -118,7 +118,7 @@ Author: Chong Jia Herng
                         </div>
 
                         <div class="form-group row staff" style="display: none">
-                            <label for="interest" class="col-md-4 col-form-label text-md-right">{{ __('Area(s) of Interest') }} required</label>
+                            <label for="interest" class="col-md-4 col-form-label text-md-right">{{ __('Area(s) of Interest') }}</label>
 
                             <div class="col-md-6">
                                 <textarea id="interest" rows="4" cols="20" class="form-control @error('interest') is-invalid @enderror" name="interest" autocomplete="interest">{{ old('interest') }}</textarea>
@@ -167,13 +167,13 @@ Author: Chong Jia Herng
     function showDiv(element)
     {
         Array.from(document.querySelectorAll('.staff')).forEach((item) => {
-          item.style.display = element.value == 'Staff' ? '' : 'none'; 
+            item.style.display = element.value == 'Staff' ? '' : 'none';
         })
-        
+
         Array.from(document.querySelectorAll('.faculty-admin')).forEach((item) => {
-          item.style.display = element.value == 'Faculty Admin' ? '' : 'none'; 
+            item.style.display = element.value == 'Faculty Admin' ? '' : 'none';
         })
-        
+
         Array.from(document.querySelectorAll('.faculty-admin-and-staff')).forEach((item) => {
             if (element.value == 'Faculty Admin' || element.value == 'Staff') {
                 item.style.display = '';
