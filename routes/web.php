@@ -36,7 +36,7 @@ Route::middleware(['web'])->group(function () {
 
 
 // Faculty Staff routes
-Route::group(['prefix' => 'faculty_staff', 'middleware' => ['web', 'auth']], function () {
+Route::group(['prefix' => 'faculty_staff', 'middleware' => ['web', 'RedirectFacultyStaff']], function () {
     // Programme routes
     Route::get('/programme', 'ProgrammeController@index');
     Route::get('/programme/add', 'ProgrammeController@create');
@@ -82,8 +82,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'RedirectAdmin']], fu
 //staff xml route
 Route::get('/staff/list', 'StaffControllers\StaffController@index')->name('staff-list');
 
-Route::get('/faculty_admin', 'FacultyAdminControllers\FacultyAdminController@index');
-Route::get('/faculty_admin/register', 'FacultyAdminControllers\FacultyAdminController@showRegisterForm');
-Route::post('/faculty_admin/register', 'FacultyAdminControllers\FacultyAdminController@register')->name('facultyAdminRegister');
-Route::get('/faculty_admin/{id}/edit', 'FacultyAdminControllers\FacultyAdminController@showEditForm');
-Route::post('/faculty_admin/{id}/edit', 'FacultyAdminControllers\FacultyAdminController@update');
+Route::group(['prefix' => 'faculty_admin', 'middleware' => ['web', 'RedirectFacultyAdmin']], function () {
+    Route::get('/', 'FacultyAdminControllers\FacultyAdminController@index');
+    Route::get('/register', 'FacultyAdminControllers\FacultyAdminController@showRegisterForm');
+    Route::post('/register', 'FacultyAdminControllers\FacultyAdminController@register')->name('facultyAdminRegister');
+    Route::get('/{id}/edit', 'FacultyAdminControllers\FacultyAdminController@showEditForm');
+    Route::post('/{id}/edit', 'FacultyAdminControllers\FacultyAdminController@update');
+});
