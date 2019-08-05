@@ -98,8 +98,6 @@ class EditController extends Controller {
                         $tmpUser = FacultyStaff::find($currentUser->id);
                     } else if ($currentUser->facultyAdmins !== null) {
                         $tmpUser = FacultyAdmin::find($currentUser->id);
-                    } else {
-                        dd('aaaa');
                     }
 
                     //add to admin
