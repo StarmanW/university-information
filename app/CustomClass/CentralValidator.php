@@ -81,17 +81,20 @@ class CentralValidator {
         ]);
     }
 
-//    public function validateEditFacultyAdmin($request) {
-//        return Validator::make($request->all(), [
-//                    'name' => $this->validationRules['name'],
-//                    'email' => $this->validationRules['email']
-//        ]);
-//    }
-
     public function validateEditFacultyStaff($request) {
         return Validator::make($request->all(), [
                     'id' => $this->validationRules['numeric'],
                     'faculty' => $this->validationRules['faculty'],
+                    'role' => $this->validationRules['roleStaff'],
+                    'specialization' => $this->validationRules['textWithSymbols'],
+                    'interest' => $this->validationRules['textWithSymbols'],
+                    'position' => $this->validationRules['position']
+        ]);
+    }
+
+    public function validateEditFacultyStaffFA($request) {
+        return Validator::make($request->all(), [
+                    'id' => $this->validationRules['numeric'],
                     'role' => $this->validationRules['roleStaff'],
                     'specialization' => $this->validationRules['textWithSymbols'],
                     'interest' => $this->validationRules['textWithSymbols'],
@@ -104,6 +107,13 @@ class CentralValidator {
                     'id' => $this->validationRules['numeric'],
                     'role' => $this->validationRules['roleFacultyAdmin'],
                     'faculty' => $this->validationRules['faculty'],
+        ]);
+    }
+
+    public function validateEditFacultyAdminFA($data) {
+        return Validator::make($data, [
+                    'id' => $this->validationRules['numeric'],
+                    'role' => $this->validationRules['roleFacultyAdmin'],
         ]);
     }
 
