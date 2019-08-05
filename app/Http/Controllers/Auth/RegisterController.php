@@ -56,17 +56,19 @@ use RegistersUsers;
      */
     protected function validator(array $data) {
         if ($data['role'] === 'Admin') {
-            return $this->centralValidator->validateRegisterAdmin($data);
+            $validator = $this->centralValidator->validateRegisterAdmin($data);
         } else if ($data['role'] === 'Staff') {
-            return $this->centralValidator->validateRegisterStaff($data);
-        } else {
-            return redirect()->back()->withInput()->with('roleError', 'Please select an appropriate role');
+            $validator = $this->centralValidator->validateRegisterStaff($data);
         }
+        return $validator;
     }
 
     public function register(Request $request) {
         if ($request->input('role') === 'Admin' || $request->input('role') === 'Staff') {
             $this->validator($request->all())->validate();
+            if ($validator->fails()) {
+                return redirect()->back()->withInput()->with('registerError', 'Please enter appropriate values.');
+            }
 
             event(new Registered($user = $this->create($request->all())));
 
