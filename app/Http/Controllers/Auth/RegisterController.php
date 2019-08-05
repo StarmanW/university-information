@@ -63,7 +63,7 @@ use RegistersUsers;
         } else if ($data['role'] === 'Faculty Admin') {
             $validator = $this->centralValidator->validateRegisterFacultyAdmin($data);
         } else if ($data['role'] === 'Staff') {
-            $validator = $this->centralValidator->validateRegisterStaff($data);
+            $validator = $this->centralValidator->validateRegisterFacultyStaff($data);
         }
         
         return $validator;
