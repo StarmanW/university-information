@@ -9,6 +9,8 @@ class RedirectFacultyAdmin
 {
     /**
      * Handle an incoming request.
+     * 
+     * Author: CHong Jia Herng
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
