@@ -65,13 +65,18 @@ class EditController extends Controller {
     protected function edit(Request $request, $id) {
         $currentUser = User::find($id);
         $validator;
+        $userSaved = false;
+        $newAdminSaved = false;
+        $newStaffSaved = false;
+        $newFacultyAdminSaved = false;
+        $oldUserDeleted = false;
 
         if ($request->input('role') === 'Admin') {
             $validator = $this->validator->validateEditAdmin($request);
         } else if ($request->input('role') === 'Staff') {
-            $validator = $this->validator->validateEditStaff($request);
-        } else if ($request->input('role') === 'FacultyAdmin') {
-            $validator = $this->validator->validateEditFacultyAdmin($request);
+            $validator = $this->validator->validateEditFacultyStaff($request);
+        } else if ($request->input('role') === 'Faculty Admin') {
+            $validator = $this->validator->validateEditFacultyAdmin($request->all());
         } else {
             return redirect()->back()->withInput()->with('roleError', 'Please select an appropriate role');
         }
@@ -89,10 +94,12 @@ class EditController extends Controller {
                     //to admin from...
                     //find user id
                     //find user originate from which table using 
-                    if (count($currentUser->facultyStaffs) === 1) {
+                    if ($currentUser->facultyStaffs !== null) {
                         $tmpUser = FacultyStaff::find($currentUser->id);
-                    } else if (count($currentUser->facultyAdmins) === 1) {
+                    } else if ($currentUser->facultyAdmins !== null) {
                         $tmpUser = FacultyAdmin::find($currentUser->id);
+                    } else {
+                        dd('aaaa');
                     }
 
                     //add to admin
@@ -108,12 +115,12 @@ class EditController extends Controller {
                     //to staff from...
                     //find user id
                     //find user originate from which table using 
-                    if (count($currentUser->admins) === 1) {
+                    if ($currentUser->admins !== 1) {
                         $tmpUser = Admin::find($currentUser->id);
-                    } else if (count($currentUser->facultyAdmins) === 1) {
+                    } else if ($currentUser->facultyAdmins !== null) {
                         $tmpUser = FacultyAdmin::find($currentUser->id);
                     }
-                    
+
                     //add to staff
                     $newStaff = new FacultyStaff();
                     $newStaff->id = $currentUser->id;
@@ -127,18 +134,19 @@ class EditController extends Controller {
 
                     //remove user from...
                     $oldUserDeleted = $tmpUser->delete();
-                } else if ($request->input('role') === 'FacultyAdmin') {
+                } else if ($request->input('role') === 'Faculty Admin') {
                     //to faculty admin from...
                     //find user id
                     //find user originate from which table using 
-                    if (count($currentUser->admins) === 1) {
+                    if ($currentUser->admins !== null) {
                         $tmpUser = Admin::find($currentUser->id);
-                    } else if (count($currentUser->facultyStaffs) === 1) {
+                    } else if ($currentUser->facultyStaffs !== null) {
                         $tmpUser = FacultyStaff::find($currentUser->id);
                     }
 
+//                    dd($tmpUser);
                     //add to faculty admin
-                    $newFacultyAdmin = new FacultyStaff();
+                    $newFacultyAdmin = new FacultyAdmin();
                     $newFacultyAdmin->id = $currentUser->id;
                     $newFacultyAdmin->user_id = $currentUser->id;
                     $newFacultyAdmin->name = $tmpUser->name;
@@ -150,13 +158,13 @@ class EditController extends Controller {
                 }
 
                 //update to new role
-                $newUser->role = $request->input('role');
-                $userSaved = $newUser->save();
+                $currentUser->role = $request->input('role');
+                $userSaved = $currentUser->save();
 
-                if (($userSaved && ($newAdminSaved || $newStaffSaved || $userFacultyStaffSaved)) && $oldUserDeleted) {
+                if (($userSaved && ($newAdminSaved || $newStaffSaved || $newFacultyAdminSaved)) && $oldUserDeleted) {
                     return redirect('/admin/home');
                 } else {
-                    return redirect()->back()->withInputs()->with('editUserError', 'Unable to save user data, please try again.');
+                    return redirect()->back()->with('editUserError', 'Unable to save user data, please try again.');
                 }
             }
         }

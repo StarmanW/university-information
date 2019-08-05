@@ -63,9 +63,9 @@ Author: Chong Jia Herng
 
                             <div class="col-md-6">
                                 <select onchange="showDiv(this)" name="role" class="form-control @error('role') is-invalid @enderror">
-                                    <option value="Admin" selected="selected"@if(old('role') === 'Admin'){{ 'selected="selected"' }}@endif>Admin</option>
-                                    <option value="Faculty Admin" @if(old('role') === 'Faculty Admin'){{ 'selected="selected"' }}@endif>Faculty Admin</option>
-                                    <option value="Staff" @if(old('role') === 'Staff'){{ 'selected="selected"' }}@endif>Staff</option>
+                                    <option value="Admin" @if($user->role === 'Admin'){{ 'selected="selected"' }}@endif>Admin</option>
+                                    <option value="Faculty Admin" @if($user->role === 'Faculty Admin'){{ 'selected="selected"' }}@endif>Faculty Admin</option>
+                                    <option value="Staff" @if($user->role === 'Staff'){{ 'selected="selected"' }}@endif>Staff</option>
                                 </select>
 
                                 @error('role')
