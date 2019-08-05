@@ -65,7 +65,9 @@ use RegistersUsers;
 
     public function register(Request $request) {
         if ($request->input('role') === 'Admin' || $request->input('role') === 'Staff') {
-            $this->validator($request->all())->validate();
+            $validator = $this->validator($request->all());
+            $validator->validate();
+
             if ($validator->fails()) {
                 return redirect()->back()->withInput()->with('registerError', 'Please enter appropriate values.');
             }

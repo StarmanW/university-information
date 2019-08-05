@@ -17,6 +17,11 @@ class EnforceForeignKeys extends Migration
             $table->foreign('user_id')->references('id')->on('users');
         });
 
+        Schema::table('faculty_admins', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('faculty_id')->references('id')->on('faculties');
+        });
+
         Schema::table('faculty_staff', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('faculty_id')->references('id')->on('faculties');
