@@ -23,6 +23,8 @@ use AuthenticatesUsers;
     /**
      * Where to redirect users after login.
      *
+     * Author: Chong Jia Herng
+     * 
      * @var string
      */
 //    protected $redirectTo = '/home';

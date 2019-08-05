@@ -1,3 +1,7 @@
+<!--
+Author: Chong Jia Herng
+--->
+
 @extends(((Auth::user()->role === 'Admin') ? 'layouts.admin' : 'layouts.facultyStaff'))
 
 @section('content')
