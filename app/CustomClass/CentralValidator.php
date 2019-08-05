@@ -32,7 +32,8 @@ class CentralValidator {
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'roleAdmin' => ['required', 'string', Rule::in(['Admin'])],
             'roleStaff' => ['required', 'string', Rule::in(['Staff'])],
-            'roleAdminOrStaff' => ['required', 'string', Rule::in(['Admin', 'Staff'])],
+            'roleFacultyAdmin' => ['required', 'string', Rule::in(['Faculty Admin'])],
+            'roleAll' => ['required', 'string', Rule::in(['Admin', 'Staff', 'FacultyAdmin'])],
             'faculty' => ['required', 'string', 'exists:faculties,id', 'regex:/^[A-z]{4}$/'],
             'position' => ['required', 'string', Rule::in(['Dean', 'Lecturer', 'Tutor'])],
             //course
@@ -65,10 +66,20 @@ class CentralValidator {
         ]);
     }
 
+    public function validateRegisterFacultyAdmin($data) {
+        return Validator::make($data, [
+                    'name' => $this->validationRules['name'],
+                    'email' => $this->validationRules['email'],
+                    'password' => $this->validationRules['password'],
+                    'role' => $this->validationRules['roleFacultyAdmin'],
+                    'faculty' => $this->validationRules['faculty'],
+        ]);
+    }
+
     public function validateEditAdmin($request) {
         return Validator::make($request->all(), [
                     'id' => $this->validationRules['numeric'],
-                    'role' => $this->validationRules['roleAdminOrStaff']
+                    'role' => $this->validationRules['roleAdmin']
         ]);
     }
 
@@ -80,6 +91,14 @@ class CentralValidator {
                     'specialization' => $this->validationRules['textWithSymbols'],
                     'interest' => $this->validationRules['textWithSymbols'],
                     'position' => $this->validationRules['textWithSymbols']
+        ]);
+    }
+
+    public function validateEditFacultyAdmin($data) {
+        return Validator::make($data, [
+                    'id' => $this->validationRules['numeric'],
+                    'role' => $this->validationRules['roleFacultyAdmin'],
+                    'faculty' => $this->validationRules['faculty'],
         ]);
     }
 
