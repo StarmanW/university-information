@@ -10,28 +10,24 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 
-class FacultyAdminController extends Controller
-{
+class FacultyAdminController extends Controller {
+
     private $validator;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->validator = new CentralValidator();
     }
 
-    public function index()
-    {
+    public function index() {
         $facultyStaffs = User::where('role', '!=', 'Admin')->where('id', '!=', Auth::user()->id)->get();
         return view('facultyAdmin.index', ['facultyStaffs' => $facultyStaffs]);
     }
 
-    public function showRegisterForm()
-    {
+    public function showRegisterForm() {
         return view('facultyAdmin.register');
     }
 
-    public function register(Request $request)
-    {
+    public function register(Request $request) {
         $validator = $this->validator->validateRegisterFacultyStaff($request->all());
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -61,17 +57,15 @@ class FacultyAdminController extends Controller
         }
     }
 
-    public function showEditForm($id)
-    {
+    public function showEditForm($id) {
         $staff = User::find($id);
         return view('facultyAdmin.edit', ['staff' => $staff]);
     }
 
-    public function update(Request $request, $id)
-    {
-        $user = User::find($id);
+    public function update(Request $request, $id) {
+        $currentUser = User::find($id);
 
-        if ($user->role === 'Faculty Admin') {
+        if ($currentUser->role === 'Faculty Admin') {
             $validator = $this->validator->validateRegisterFacultyStaff($request->all());
         } else {
             $validator = $this->validator->validateRegisterFacultyStaff($request->all());
@@ -80,27 +74,47 @@ class FacultyAdminController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
-            $user->email = $request->input('email');
+            if ($request->input('role') === 'FacultyAdmin') {
+                //to faculty admin
+                //find user id
+                $tmpUser = FacultyStaff::find($currentUser->id);
 
-            if ($user->role === 'Faculty Admin') {
-                // Update faculty admin
-                $facultyStaff = $user->facultyAdmin;
-                $facultyStaff->name = $request->input('name');
-                $facultyAdminSaved = $facultyStaff->save();
-            } else if ($user->role === 'Staff') {
-                $facultyStaff = $user->facultyAdmin;
-                $facultyStaff->name = $request->input('name');
-                $facultyStaff->specialization = $request->input('interest');
-                $facultyStaff->area_of_interest = $request->input('specialization');
-                $facultyStaff->position = $request->input('position');
-                $facultyStaffSaved = $facultyStaff->save();
+                //add to faculty admin
+                $newFacultyAdmin = new FacultyAdmin();
+                $newFacultyAdmin->id = $currentUser->id;
+                $newFacultyAdmin->user_id = $currentUser->id;
+                $newFacultyAdmin->name = $tmpUser->name;
+                $newFacultyAdmin->faculty_id = $request->input('faculty');
+                $newFacultyAdminSaved = $newFacultyAdmin->save();
+
+                //remove user from...
+                $oldUserDeleted = $tmpUser->delete();
+            } else if ($request->input('role') === 'Staff') {
+                //to staff
+                //find user id
+                $tmpUser = FacultyAdmin::find($currentUser->id);
+
+                //add to staff
+                $newStaff = new FacultyStaff();
+                $newStaff->id = $currentUser->id;
+                $newStaff->user_id = $currentUser->id;
+                $newStaff->name = $tmpUser->name;
+                $newStaff->faculty_id = $request->input('faculty');
+                $newStaff->specialization = $request->input('specialization');
+                $newStaff->area_of_interest = $request->input('interest');
+                $newStaff->position = $request->input('position');
+                $newStaffSaved = $newStaff->save();
+
+                //remove user from...
+                $oldUserDeleted = $tmpUser->delete();
             }
 
-            if ($facultyAdminSaved && $facultyStaffSaved) {
+            if ( ($newFacultyAdminSaved || $newStaffSaved) && $oldUserDeleted ) {
                 return redirect()->back()->with('updateStatus', true);
             } else {
                 return redirect()->back()->with('updateStatus', false)->withInput();
             }
         }
     }
+
 }
