@@ -10,6 +10,8 @@ class RedirectAdmin
     /**
      * Handle an incoming request.
      *
+     * Author: Chong Jia Herng
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
      * @return mixed
