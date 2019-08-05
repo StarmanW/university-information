@@ -22,7 +22,7 @@
 
             <h1 class="text-center">Add New Certificate</h1>
             <hr>
-            <form method="POST" action="/certificates/add" enctype="multipart/form-data">
+            <form method="POST" action="/faculty_staff/certificates/add" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 {{-- Certificate Name --}}
                 <div class="form-group">

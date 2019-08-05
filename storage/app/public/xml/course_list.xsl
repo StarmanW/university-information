@@ -28,7 +28,7 @@
                 <td>
                     <xsl:element name="a">
                         <xsl:attribute name="href">
-                            <xsl:text>/courses/</xsl:text>
+                            <xsl:text>/faculty_staff/courses/</xsl:text>
                             <xsl:value-of select="id"/>
                             <xsl:text>/edit</xsl:text>
                         </xsl:attribute>

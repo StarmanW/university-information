@@ -23,7 +23,7 @@ class CentralValidator {
     public function __construct() {
         $this->validationRules = [
             //general
-            'textWithSymbols' => ['required', 'string', 'regex:/^[0-9A-z\(\)\-\@\,\& ]{0,255}$/'],
+            'textWithSymbols' => ['required', 'string', 'regex:/^\w\W\d\D][^\<\>]+$/'],
             'name' => ['required', 'string', 'regex:/^[A-z\(\)\-\@\ ]{1,255}$/'],
             'numeric' => ['required', 'numeric'],
             'numericDigitFour' => ['required', 'integer', 'min:1', 'max:4', 'regex:/^[1-4]$/'],
