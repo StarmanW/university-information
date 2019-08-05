@@ -23,7 +23,7 @@ class CentralValidator {
     public function __construct() {
         $this->validationRules = [
             //general
-            'textWithSymbols' => ['required', 'string', 'regex:/^[A-z\(\)\-\@\,\& ]{0,255}$/'],
+            'textWithSymbols' => ['required', 'string', 'regex:/^[0-9A-z\(\)\-\@\,\& ]{0,255}$/'],
             'name' => ['required', 'string', 'regex:/^[A-z\(\)\-\@\ ]{1,255}$/'],
             'numeric' => ['required', 'numeric'],
             'numericDigitFour' => ['required', 'integer', 'min:1', 'max:4', 'regex:/^[1-4]$/'],
@@ -52,13 +52,11 @@ class CentralValidator {
         ]);
     }
 
-    public function validateRegisterStaff($data) {
+    public function validateRegisterFacultyStaff($data) {
         return Validator::make($data, [
                     'name' => $this->validationRules['name'],
                     'email' => $this->validationRules['email'],
                     'password' => $this->validationRules['password'],
-                    'role' => $this->validationRules['roleStaff'],
-                    'faculty' => $this->validationRules['faculty'],
                     'specialization' => $this->validationRules['textWithSymbols'],
                     'interest' => $this->validationRules['textWithSymbols'],
                     'position' => $this->validationRules['position']
@@ -72,11 +70,17 @@ class CentralValidator {
         ]);
     }
 
-    public function validateEditStaff($request) {
+    public function validateEditFacultyAdmin($request) {
         return Validator::make($request->all(), [
-                    'id' => $this->validationRules['numeric'],
-                    'role' => $this->validationRules['roleStaff'],
-                    'faculty' => $this->validationRules['faculty'],
+                    'name' => $this->validationRules['name'],
+                    'email' => $this->validationRules['email']
+        ]);
+    }
+
+    public function validateEditFacultyStaff($request) {
+        return Validator::make($request->all(), [
+                    'name' => $this->validationRules['name'],
+                    'email' => $this->validationRules['email'],
                     'specialization' => $this->validationRules['textWithSymbols'],
                     'interest' => $this->validationRules['textWithSymbols'],
                     'position' => $this->validationRules['textWithSymbols']
