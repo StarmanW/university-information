@@ -2,7 +2,7 @@
 Author: Chong Jia Herng
 --->
 
-@extends(((Auth::user()->role === 'Admin') ? 'layouts.admin' : 'layouts.facultyStaff'))
+@extends((Auth::user()->role === 'Admin') ? 'layouts.admin' : ((Auth::user()->role === 'Faculty Admin') ? 'layouts.facultyAdmin' : 'layouts.facultyStaff'))
 
 @section('content')
 <div class="container">

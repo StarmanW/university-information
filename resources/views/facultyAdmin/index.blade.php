@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.facultyAdmin')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -21,7 +21,7 @@
                             @foreach ($facultyStaffs as $staff)
                             <tr>
                                 <td>{{ $staff->id }}</td>
-                                @if ($staff->role === 'FacultyAdmin')
+                                @if ($staff->role === 'Faculty Admin')
                                     <td>{{$staff->facultyAdmins->name}}</td>
                                 @elseif ($staff->role === 'Staff')
                                     <td>{{$staff->facultyStaffs->name}}</td>

@@ -2,10 +2,10 @@
 <!DOCTYPE staffList SYSTEM 'staff.dtd'>
 <staffList>
   <staff>
-    <name>a</name>
-    <position>Lecturer</position>
-    <faculty>FAFB</faculty>
-    <specialization>fvfdfdv</specialization>
-    <area_of_interest>dfvfdv</area_of_interest>
+    <name>Michael Khors</name>
+    <position>Tutor</position>
+    <faculty>FOCS</faculty>
+    <specialization>Network Programming</specialization>
+    <area_of_interest>IPv6, IPv4</area_of_interest>
   </staff>
 </staffList>

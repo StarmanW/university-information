@@ -12,7 +12,7 @@ class AddProgramme implements ProgrammeMaintenance
         // Add new programme
         $programme = new Programme();
         $programme->id = $request->input('prog_id');
-        $programme->faculty_id = 'FOCS';    // Auth::user()->facultyStaffs->faculty_id
+        $programme->faculty_id = Auth::user()->facultyStaffs->faculty_id;
         $programme->prog_name = $request->input('prog_name');
         $programme->prog_desc = $request->input('prog_desc');
         $programme->prog_mer = $request->input('prog_mer');
