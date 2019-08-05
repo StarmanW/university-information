@@ -29,6 +29,9 @@ class FacultyAdminController extends Controller {
 
     public function register(Request $request) {
         $validator = $this->validator->validateRegisterFacultyStaff($request->all());
+        $userSaved = false;
+        $facultyStaffSaved = false;
+        
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
@@ -68,7 +71,10 @@ class FacultyAdminController extends Controller {
 
     public function update(Request $request, $id) {
         $currentUser = User::find($id);
-
+        $newStaffSaved = false;
+        $newFacultyAdminSaved = false;
+        $oldUserDeleted = false;
+        
         if ($currentUser->role === 'Faculty Admin') {
             $validator = $this->validator->validateRegisterFacultyStaff($request->all());
         } else {
