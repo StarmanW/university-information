@@ -41,6 +41,10 @@ class User extends Authenticatable
         return $this->hasOne('App\Model\Admin', 'user_id', 'id');
     }
 
+    public function facultyAdmins() {
+        return $this->hasOne('App\Model\FacultyAdmin', 'user_id', 'id');
+    }
+
     public function facultyStaffs() {
         return $this->hasOne('App\Model\FacultyStaff', 'user_id', 'id');
     }
