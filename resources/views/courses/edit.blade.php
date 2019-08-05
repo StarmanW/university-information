@@ -22,7 +22,7 @@
 
             <h1 class="text-center">Update course {{$course->id}} {{$course->course_name}}</h1>
             <hr>
-            <form method="POST" action="/courses/{{ $course->id }}/edit" enctype="multipart/form-data">
+            <form method="POST" action="/faculty_staff/courses/{{ $course->id }}/edit" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 {{-- Course Name --}}
                 <div class="form-group">
@@ -67,7 +67,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <a href="/courses" type="button" class="btn btn-outline-primary btn-block">Back</a>
+                        <a href="/faculty_staff/courses" type="button" class="btn btn-outline-primary btn-block">Back</a>
                     </div>
                     <div class="col-md-6">
                         <button type="submit" class="btn btn-outline-success btn-block">Update Course</button>

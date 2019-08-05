@@ -22,7 +22,7 @@
 
             <h1 class="text-center">Add New Course</h1>
             <hr>
-            <form method="POST" action="/courses/add" enctype="multipart/form-data">
+            <form method="POST" action="/faculty_staff/courses/add" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 {{-- Course ID --}}
                 <div class="form-group">

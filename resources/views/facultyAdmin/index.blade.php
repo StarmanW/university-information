@@ -23,7 +23,7 @@
                                 <td>{{ $staff->id }}</td>
                                 @if ($staff->role === 'Faculty Admin')
                                     <td>{{$staff->facultyAdmins->name}}</td>
-                                @elseif ($staff->role === 'Faculty Staff')
+                                @elseif ($staff->role === 'Staff')
                                     <td>{{$staff->facultyStaffs->name}}</td>
                                 @endif
                                 <td>{{ $staff->email }}</td>

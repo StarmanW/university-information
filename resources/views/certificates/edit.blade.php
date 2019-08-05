@@ -22,7 +22,7 @@
 
             <h1 class="text-center">Update Certificate {{$certificate->cert_name}}</h1>
             <hr>
-            <form method="POST" action="/certificates/{{ $certificate->id }}/edit" enctype="multipart/form-data">
+            <form method="POST" action="/faculty_staff/certificates/{{ $certificate->id }}/edit" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 {{-- Certificate Name --}}
                 <div class="form-group">
@@ -60,7 +60,7 @@
 
                 <div class="row mt-2">
                     <div class="col-md-6">
-                        <a href="/certificates" type="button" class="btn btn-outline-primary btn-block">Back</a>
+                        <a href="/faculty_staff/certificates" type="button" class="btn btn-outline-primary btn-block">Back</a>
                     </div>
                     <div class="col-md-6">
                         <button type="submit" class="btn btn-outline-success btn-block">Update Certificate</button>

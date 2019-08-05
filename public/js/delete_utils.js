@@ -38,7 +38,7 @@ function deleteCourse(courseID, courseName) {
 
     alertify.confirm(`Confirm to delete course "${courseID}-${courseName}?`, function (e) {
         if (e) {
-            delForm.action = `/courses/${courseID}/delete`;
+            delForm.action = `/faculty_staff/courses/${courseID}/delete`;
             delForm.submit();
         }
     }).setting({

@@ -37,7 +37,7 @@ class FacultyAdminController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $user = new User();
-            $user->role = 'Faculty Staff';
+            $user->role = 'Staff';
             $user->email = $request->input('email');
             $user->password = Hash::make($request->input('password'));
             $userSaved = $user->save();
@@ -80,22 +80,23 @@ class FacultyAdminController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
-
             $user->email = $request->input('email');
-            $userSaved = $user->save();
 
-            // Add new faculty staff
-            $facultyStaff = new FacultyStaff();
-            $facultyStaff->id = $user->id;
-            $facultyStaff->user_id = $user->id;
-            $facultyStaff->name = $request->input('name');
-            $facultyStaff->faculty_id = 'FOCS'; //Auth::user()->facultyAdmins->faculty_id
-            $facultyStaff->specialization = $request->input('specialization');
-            $facultyStaff->area_of_interest = $request->input('interest');
-            $facultyStaff->position = $request->input('position');
-            $facultyStaffSaved = $facultyStaff->save();
+            if ($user->role === 'Faculty Admin') {
+                // Update faculty admin
+                $facultyStaff = $user->facultyAdmin;
+                $facultyStaff->name = $request->input('name');
+                $facultyAdminSaved = $facultyStaff->save();
+            } else if ($user->role === 'Staff') {
+                $facultyStaff = $user->facultyAdmin;
+                $facultyStaff->name = $request->input('name');
+                $facultyStaff->specialization = $request->input('interest');
+                $facultyStaff->area_of_interest = $request->input('specialization');
+                $facultyStaff->position = $request->input('position');
+                $facultyStaffSaved = $facultyStaff->save();
+            }
 
-            if ($userSaved && $facultyStaffSaved) {
+            if ($facultyAdminSaved && $facultyStaffSaved) {
                 return redirect()->back()->with('updateStatus', true);
             } else {
                 return redirect()->back()->with('updateStatus', false)->withInput();
