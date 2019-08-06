@@ -4,6 +4,7 @@ namespace App\Patterns\Strategy;
 
 use App\Model\Programme;
 use App\Model\CampusProgramme;
+use Auth;
 
 class AddProgramme implements ProgrammeMaintenance
 {
@@ -18,6 +19,7 @@ class AddProgramme implements ProgrammeMaintenance
         $programme->prog_mer = $request->input('prog_mer');
         $programme->prog_duration = $request->input('prog_duration');
         $programme->prog_level = $request->input('prog_level');
+        $progSave = $programme->save();
 
         foreach ($request->input('branch_offered') as $branches) {
             $campusProg = new CampusProgramme();
@@ -26,7 +28,7 @@ class AddProgramme implements ProgrammeMaintenance
             $campusProg->save();
         }
 
-        if ($programme->save()) {
+        if ($progSave) {
             return true;
         } else {
             return false;

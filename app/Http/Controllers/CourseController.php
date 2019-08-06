@@ -10,6 +10,7 @@ use App\CustomClass\CentralValidator;
 use DOMDocument;
 use XSLTProcessor;
 use SimpleXMLElement;
+use Auth;
 use App\Http\Resources\Course as CourseResource;
 
 class CourseController extends Controller
@@ -102,7 +103,7 @@ class CourseController extends Controller
             // Add new course
             $course = new Course();
             $course->id = $request->input('course_id');
-            $course->faculty_id = 'FOCS';   // Auth::user()->facultyStaffs->faculty_id;
+            $course->faculty_id = Auth::user()->facultyStaffs->faculty_id;   
             $course->course_name = $request->input('course_name');
             $course->course_desc = $request->input('course_desc');
             $course->course_cred_hour = $request->input('course_cred_hour');
