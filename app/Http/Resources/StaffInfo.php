@@ -18,7 +18,8 @@ class StaffInfo extends JsonResource {
             'position' => $this->position,
             'faculty' => $this->faculty_id,
             'specialization' => $this->specialization,
-            'area_of_interest' => $this->area_of_interest
+            'area_of_interest' => $this->area_of_interest,
+            'email' => $this->user->email
         ];
     }
 
