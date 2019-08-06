@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Author - Samuel Wong Kim Foong
+ */
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
