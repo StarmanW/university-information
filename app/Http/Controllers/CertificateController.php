@@ -62,7 +62,8 @@ class CertificateController extends Controller
             $certificate = new Certificate();
             $certificate->cert_name = $request->input('cert_name');
             $certificate->cert_desc = $request->input('cert_desc');
-
+            $certSave = $certificate->save();
+            
             foreach ($request->input('prog_incor') as $prog_id) {
                 $progCertificate = new ProgrammeCertificate();
                 $progCertificate->prog_id = $prog_id;
@@ -70,7 +71,7 @@ class CertificateController extends Controller
                 $progCertificate->save();
             }
 
-            if ($certificate->save()) {
+            if ($certSave === true) {
                 return redirect()->back()->with('addStatus', true);
             } else {
                 return redirect()->back()->with('addStatus', false)->withInput();

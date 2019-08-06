@@ -33,12 +33,11 @@
                 </thead>
                 <tbody>
                     {!!$courses!!}
-
-                    <form method="post" class="del_form" style="display: none;">
-                        {{csrf_field()}}
-                    </form>
                 </tbody>
             </table>
+            <form method="post" class="del_form" style="display: none;">
+                {{csrf_field()}}
+            </form>
         </div>
     </div>
 </div>
