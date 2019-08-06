@@ -29,11 +29,6 @@ class CourseController extends Controller
      */
     public function index()
     {
-        // $certs = Certificate::all();
-        // $jSON = json_decode($certs, true);
-        // $xmlCourseData = $this->array2xml($jSON, false);
-        // return response($xmlCourseData)->header('Content-Type', 'application/xml');
-
         $courses = CourseResource::collection(Course::all());
         $jSON = json_decode($courses->collection, true);
         $xmlCourseData = $this->array2xml($jSON, false);

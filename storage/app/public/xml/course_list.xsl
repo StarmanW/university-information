@@ -3,7 +3,7 @@
 <!--
     Document   : course_list.xsl
     Created on : July 16, 2019, 4:29 PM
-    Author     : TARUC
+    Author     : Samuel Wong Kim Foong
     Description:
         Purpose of transformation follows.
 -->
