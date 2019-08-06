@@ -11,6 +11,7 @@ use App\Patterns\Strategy\UpdateProgramme;
 use App\Model\Programme;
 use App\CustomClass\CentralValidator;
 use App\Http\Resources\Programme as ProgrammeResource;
+use App\Patterns\Strategy\DeleteProgramme;
 
 class ProgrammeController extends Controller
 {
@@ -125,12 +126,8 @@ class ProgrammeController extends Controller
 
     public function delete($id)
     {
-        $prog = Programme::find($id);
-        $prog->campusProgrammes()->delete();
-        $prog->programmeCourses()->delete();
-        $prog->programmeCertificates()->delete();
-        $prog->programmeLoans()->delete();
-        $prog->delete();
+        $context = new Context(new DeleteProgramme());
+        $context->executeStrategy($id);
         return redirect()->back()->with('deleteStatus', true);
     }
 }
