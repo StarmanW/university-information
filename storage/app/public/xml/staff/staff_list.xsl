@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-    Document   : course_list.xsl
+    Document   : staff_list.xsl
     Created on : July 16, 2019, 4:29 PM
     Author     : 
     Description:
