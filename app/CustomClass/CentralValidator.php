@@ -14,7 +14,7 @@ use Illuminate\Validation\Rule;
 /**
  * Description of CentralValidator
  *
- * @author sein
+ * @author Chong Jia Herng
  */
 class CentralValidator {
 
