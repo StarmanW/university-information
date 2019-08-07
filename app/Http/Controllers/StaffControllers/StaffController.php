@@ -11,6 +11,8 @@ use SimpleXMLElement;
 use App\Http\Resources\StaffInfo as StaffInfoResource;
 
 class StaffController extends Controller {
+    
+//    Author: Chong Jia Herng
 
     public function index() {
 
@@ -87,6 +89,9 @@ class StaffController extends Controller {
             $staff->appendChild($element);
             $element = $dom->createElement('area_of_interest');
             $element->appendChild($dom->createTextNode($staffListArray[$i]['area_of_interest']));
+            $staff->appendChild($element);
+            $element = $dom->createElement('email');
+            $element->appendChild($dom->createTextNode($staffListArray[$i]['user']['email']));
             $staff->appendChild($element);
         }
 
