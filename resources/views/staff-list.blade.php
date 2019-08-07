@@ -34,6 +34,7 @@ Author: Chong Jia Herng
                             <th>Faculty</th>
                             <th>Specialization</th>
                             <th>Area of Interest</th>
+                            <th>Email</th>
                         </thead>
                         <tbody>
                             {!! $staffList !!}

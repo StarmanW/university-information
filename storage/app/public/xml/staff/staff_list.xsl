@@ -28,6 +28,9 @@
                 <td>
                     <xsl:value-of select="area_of_interest"></xsl:value-of>
                 </td>
+                <td>
+                    <xsl:value-of select="email"></xsl:value-of>
+                </td>
             </tr>
         </xsl:for-each>
     </xsl:template>
