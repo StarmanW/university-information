@@ -1,4 +1,7 @@
 <?php
+/**
+ * Author - Samuel Wong Kim Foong
+ */
 
 namespace App\Http\Controllers;
 
